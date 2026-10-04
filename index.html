@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7fbff">
+<title>イオンモールウォーキング 近畿制覇</title>
+<link rel="manifest" href="./manifest.json">
+<style>
+:root {
+  --bg:#f7fbff;
+  --card:#ffffff;
+  --line:#c7d9e6;
+  --text:#2d4450;
+  --sub:#6a8796;
+  --easy:#8e7be8;   /* C = 紫 */
+  --normal:#f1cf58; /* B = 黄 */
+  --hard:#65a9f4;   /* A = 青 */
+  --special:#ef6767;/* S = 赤 */
+  --main:#d8e6f1;
+  --extra:#cfdef0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; min-height:100%; background:linear-gradient(180deg,#fbfeff,#edf7fe); color:var(--text); }
+body { overflow:auto; }
+main {
+  max-width:1280px;
+  margin:auto;
+  padding:6px 10px;
+  min-height:100vh;
+}
+.sheet {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:8px 12px 10px;
+  box-shadow:0 3px 12px rgba(84,122,148,.07);
+}
+.top {
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:8px;
+  align-items:center;
+  margin-bottom:4px;
+}
+.illust {
+  width:46px; height:46px; border-radius:12px; border:1px solid var(--line);
+  background:#f2fbff; display:grid; place-items:center; font-size:25px;
+}
+.title-block h1 {
+  margin:0 0 2px; font-size:21px; color:#5a87b9; letter-spacing:.04em; line-height:1.05;
+}
+.goal {
+  display:flex; gap:8px; align-items:center;
+}
+.goal label { font-weight:800; color:var(--sub); font-size:14px; }
+.goal input {
+  flex:1; min-width:0; padding:6px 10px; border:1px solid var(--line); border-radius:999px;
+  font-size:13px; background:#fcfeff;
+}
+.info-bar {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:5px 0;
+}
+.info-box {
+  background:#fcfeff; border:1px solid var(--line); border-radius:14px; padding:5px 8px; text-align:center;
+}
+.info-box strong { display:block; font-size:19px; line-height:1.05; }
+.info-box span { font-size:11px; color:var(--sub); }
+.toolbar {
+  display:flex; gap:5px; flex-wrap:nowrap; align-items:center; margin:5px 0 6px;
+}
+.search {
+  flex:1; min-width:160px; padding:7px 10px; border:1px solid var(--line); border-radius:12px;
+  font-size:14px; background:#fff;
+}
+.btn {
+  padding:7px 10px; border-radius:12px; border:1px solid var(--line); background:#fff;
+  color:var(--text); font-weight:800; cursor:pointer; font-size:12px; white-space:nowrap;
+}
+.btn.active { background:#243846; color:#fff; border-color:#243846; }
+.btn.primary { background:#3f95d2; color:#fff; border-color:#3f95d2; }
+.note {
+  background:#fcfeff; border:1px solid var(--line); border-radius:12px; padding:6px 10px;
+  color:var(--sub); font-size:11px; margin-bottom:6px;
+}
+.note strong { color:#4c7089; }
+.card-frame {
+  border:1.5px solid var(--line); border-radius:16px; padding:6px 8px 7px; background:#fcfeff;
+}
+.frame-head { text-align:center; margin-bottom:3px; }
+.frame-head strong { display:block; font-size:12px; color:#5f8eae; line-height:1.1; }
+.frame-head span { font-size:10px; color:var(--sub); }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(8,minmax(0,1fr));
+  grid-template-rows:repeat(5,minmax(0,1fr));
+  gap:12px 8px;
+  align-items:center;
+  justify-items:center;
+}
+.spot {
+  width:min(100%, calc((100vh - 385px) / 5));
+  max-width:90px;
+  min-width:58px;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  border:2px solid #cfdfeb;
+  background:#dce8f2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:5px 4px 7px;
+  position:relative;
+  cursor:pointer;
+  transition:transform .14s ease, box-shadow .14s ease, background .14s ease;
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.55);
+}
+.spot:hover {
+  transform:translateY(-2px);
+  box-shadow:0 6px 14px rgba(77,124,156,.15), inset 0 2px 0 rgba(255,255,255,.6);
+}
+.spot:active { transform:scale(.95); }
+.spot .num {
+  position:absolute; top:-3px; right:-2px; min-width:23px; height:23px; padding:0 5px;
+  border-radius:999px; background:#fff; border:1px solid var(--line); display:grid; place-items:center;
+  font-size:10px; font-weight:900; color:#587e9a;
+}
+.spot .name-top {
+  font-size:9px; line-height:1.0; font-weight:900; color:#243f50; letter-spacing:.01em;
+}
+.spot .name-bottom {
+  font-size:10px; line-height:1.08; font-weight:900; color:#243f50; margin-top:2px;
+  word-break:keep-all;
+}
+.spot.extra { background:#d9e7f9; }
+.spot.diff-C { border-color:#8e7be8; }
+.spot.diff-B { border-color:#f1cf58; }
+.spot.diff-A { border-color:#65a9f4; }
+.spot.diff-S { border-color:#ef6767; }
+.spot.diff-C .num { background:var(--easy); color:#fff; border-color:var(--easy); }
+.spot.diff-B .num { background:var(--normal); color:#624e00; border-color:var(--normal); }
+.spot.diff-A .num { background:var(--hard); color:#fff; border-color:var(--hard); }
+.spot.diff-S .num { background:var(--special); color:#fff; border-color:var(--special); }
+
+.spot.done {
+  box-shadow:0 4px 10px rgba(48,90,120,.16);
+}
+.spot.done.diff-C { background:#b7a4ff; border:3px solid #8e7be8; }
+.spot.done.diff-B { background:#f4d65f; border:3px solid #e0bd28; }
+.spot.done.diff-A { background:#8fc3ff; border:3px solid #5fa3f3; }
+.spot.done.diff-S { background:#ff9d9d; border:3px solid #ef6767; }
+.spot.done .name-top,
+.spot.done .name-bottom {
+  color:#173246;
+  text-shadow:none;
+  position:relative;
+  z-index:2;
+}
+.spot.done::before {
+  content:"済";
+  position:absolute;
+  left:50%;
+  top:56%;
+  transform:translate(-50%,-50%) rotate(-12deg);
+  font-size:32px;
+  font-weight:1000;
+  line-height:1;
+  opacity:.22;
+  color:#173246;
+  z-index:1;
+  pointer-events:none;
+}
+.spot.done::after {
+  content:"";
+  position:absolute;
+  inset:7px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.45);
+  z-index:1;
+}
+.spot.done .num{
+  background:rgba(255,255,255,.9);
+  color:#173246;
+  border-color:rgba(255,255,255,.9);
+}
+.spot.empty {
+  background:transparent; border-style:dashed; cursor:default;
+}
+.spot.empty .name-bottom { color:#a8bccb; font-size:10px; }
+.legend {
+  display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:4px; font-size:10px; color:var(--sub);
+}
+.legend span { display:flex; align-items:center; gap:5px; }
+.legend i { display:inline-block; width:14px; height:14px; border-radius:50%; border:1px solid #b9cfdd; }
+.legend .c { background:var(--easy); }
+.legend .b { background:var(--normal); }
+.legend .a { background:var(--hard); }
+.legend .s { background:var(--special); }
+
+@media (min-width:821px) and (min-height:650px) {
+  html, body { height:100%; overflow:hidden; }
+  main { height:100vh; }
+  .sheet { height:calc(100vh - 12px); display:flex; flex-direction:column; overflow:hidden; }
+  .card-frame { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+  .grid { flex:1; min-height:0; }
+}
+
+dialog {
+  border:0; background:transparent; padding:10px; width:min(96vw,680px);
+}
+dialog::backdrop { background:rgba(50,71,88,.36); }
+.modal {
+  background:#fff; border-radius:24px; padding:18px 18px 18px; max-height:90vh; overflow:auto; position:relative;
+  border:1px solid var(--line);
+}
+.close {
+  position:absolute; top:10px; right:10px; width:40px; height:40px; border-radius:50%; border:0;
+  background:#eef5fb; font-size:24px; cursor:pointer;
+}
+.modal h2 { margin:0 0 8px; }
+.meta { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+.badge {
+  display:inline-block; padding:4px 10px; border-radius:999px; background:#eef5fb; border:1px solid var(--line);
+  font-size:12px; font-weight:800; color:#56788f;
+}
+.box {
+  background:#fafdff; border:1px solid var(--line); border-radius:16px; padding:12px; margin-bottom:10px;
+}
+.box p { margin:0; color:var(--sub); font-size:13px; }
+.actions { display:flex; gap:8px; flex-wrap:wrap; }
+.timer {
+  font-size:42px; font-weight:900; text-align:center; font-variant-numeric:tabular-nums; margin:8px 0;
+}
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+label {
+  display:block; font-size:13px; font-weight:800; color:#4c697b;
+}
+input, textarea {
+  width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:14px; font-size:16px;
+  background:#fff; margin-top:4px;
+}
+textarea { resize:vertical; }
+.smallnote { font-size:12px; color:var(--sub); }
+.footer-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.hidden { display:none !important; }
+.install { position:fixed; right:12px; bottom:12px; z-index:5; }
+@keyframes stampBounce {
+  0% { transform:scale(1) rotate(0deg); }
+  28% { transform:scale(.78) rotate(-8deg); }
+  58% { transform:scale(1.18) rotate(4deg); }
+  80% { transform:scale(.96) rotate(-1deg); }
+  100% { transform:scale(1) rotate(0deg); }
+}
+.spot.stamp-anim { animation:stampBounce .58s cubic-bezier(.22,.9,.25,1.2); }
+@media (max-width:1000px) {
+  .grid { grid-template-columns:repeat(8,minmax(0,1fr)); gap:6px; }
+  .spot { padding:4px 3px 7px; }
+  .spot .name-top { font-size:9px; }
+  .spot .name-bottom { font-size:10px; }
+}
+@media (max-width:820px) {
+  .top { grid-template-columns:1fr; align-items:start; }
+  .grid { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  .info-bar { grid-template-columns:repeat(2,1fr); }
+  .grid2 { grid-template-columns:1fr; }
+}
+
+.fallback-box{
+  margin-top:8px;
+  padding:10px 12px;
+  border:1px dashed #c8a76a;
+  background:#fffaf0;
+  border-radius:14px;
+}
+.fallback-box label{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  font-size:13px;
+  color:#5e4b28;
+}
+.fallback-box input[type="checkbox"]{
+  width:auto;
+  margin-top:2px;
+}
+.location-result{
+  margin-top:6px;
+  font-size:12px;
+  font-weight:700;
+}
+
+
+.extras-row{
+  display:grid;
+  grid-template-columns:1fr 1.3fr auto;
+  gap:6px;
+  margin:4px 0;
+}
+.complete-box,.best-box,.secret-launch{
+  background:#fcfeff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:5px 7px;
+}
+.complete-box strong,.best-box strong{
+  display:block;
+  font-size:12px;
+  color:#5f7d90;
+  margin-bottom:4px;
+}
+.pref-list{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+}
+.pref-chip{
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  border:1px solid var(--line);
+  background:#f3f7fa;
+  color:#728a98;
+}
+.pref-chip.done{
+  background:#2f9d57;
+  color:white;
+  border-color:#2f9d57;
+}
+.best-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+.best-item{
+  background:#f3f8fc;
+  border-radius:10px;
+  padding:5px 7px;
+  min-width:0;
+}
+.best-item span{
+  display:block;
+  font-size:9px;
+  color:#78909d;
+}
+.best-item b{
+  display:block;
+  font-size:11px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.secret-launch{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.secret-launch .btn{
+  height:100%;
+}
+.secret-list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+}
+.secret-item{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px 12px;
+  background:#fbfdff;
+}
+.secret-item.locked{
+  color:#9aabb4;
+  background:#f6f8f9;
+}
+.secret-item .secret-title{
+  font-weight:900;
+  margin-bottom:3px;
+}
+.secret-item .secret-desc{
+  font-size:12px;
+}
+.secret-badge{
+  display:inline-block;
+  margin-left:6px;
+  padding:2px 7px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  background:#2f9d57;
+  color:#fff;
+}
+@media(max-width:900px){
+  .extras-row{grid-template-columns:1fr}
+  .best-list{grid-template-columns:1fr}
+}
+
+
+/* V11: compact one-screen detail panel */
+#detailDialog{
+  width:min(98vw,900px);
+}
+#detailDialog .modal{
+  max-height:96vh;
+  overflow:hidden;
+  padding:10px 12px 10px;
+}
+#detailDialog .modal h2{
+  font-size:19px;
+  line-height:1.05;
+  margin:0 40px 4px 0;
+}
+#detailDialog .meta{
+  margin-bottom:4px;
+  gap:6px;
+}
+.detail-top-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:6px;
+  margin-bottom:6px;
+}
+#detailDialog .box{
+  padding:6px 8px;
+  margin-bottom:0;
+}
+#detailDialog .timer{
+  font-size:28px;
+  margin:0 0 4px;
+}
+#detailDialog .btn{
+  padding:7px 9px;
+  font-size:12px;
+}
+.detail-fields{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:5px 7px;
+}
+.detail-fields label{
+  min-width:0;
+  font-size:10px;
+}
+.detail-fields input,
+.detail-fields textarea{
+  padding:6px 8px;
+  font-size:13px;
+  margin-top:2px;
+  border-radius:10px;
+}
+.detail-fields .memo-field{
+  grid-column:span 2;
+}
+.detail-fields textarea{
+  height:42px;
+  min-height:42px;
+  resize:none;
+}
+#detailDialog .footer-actions{
+  margin-top:6px;
+}
+#detailDialog .fallback-box{
+  padding:7px 9px;
+  margin-top:5px;
+}
+#detailDialog .smallnote,
+#detailDialog .location-result{
+  font-size:9px;
+}
+@media(max-width:560px){
+  #detailDialog .modal{
+    max-height:92vh;
+    overflow:auto;
+  }
+  .detail-top-grid{
+    grid-template-columns:1fr;
+  }
+  .detail-fields{
+    grid-template-columns:1fr 1fr;
+  }
+  .detail-fields .memo-field{
+    grid-column:1 / -1;
+  }
+}
+
+</style>
+</head>
+<body>
+<main>
+  <section class="sheet">
+    <div class="top">
+      <div class="illust">🚶</div>
+      <div class="title-block">
+        <h1>近畿スタンプカード</h1>
+        <div class="goal">
+          <label for="goalInput">目標：</label>
+          <input id="goalInput" type="text" placeholder="例：年内に近畿34制覇">
+        </div>
+      </div>
+    </div>
+
+    <section class="info-bar">
+      <div class="info-box"><strong id="clearMain">0</strong><span>/34 CLEAR</span></div>
+      <div class="info-box"><strong id="clearExtra">0</strong><span>/5 EXTRA</span></div>
+      <div class="info-box"><strong id="totalDistance">0.0</strong><span>km</span></div>
+      <div class="info-box"><strong id="totalLaps">0</strong><span>周</span></div>
+    </section>
+
+    <section class="extras-row">
+      <div class="complete-box">
+        <strong>府県コンプリート</strong>
+        <div id="prefComplete" class="pref-list"></div>
+      </div>
+
+      <div class="best-box">
+        <strong>MY BEST</strong>
+        <div class="best-list">
+          <div class="best-item"><span>最長歩行</span><b id="bestTime">—</b></div>
+          <div class="best-item"><span>最大周回数</span><b id="bestLaps">—</b></div>
+          <div class="best-item"><span>最大距離</span><b id="bestDistance">—</b></div>
+        </div>
+      </div>
+
+      <div class="secret-launch">
+        <button type="button" id="secretBtn" class="btn">🔒 シークレット実績</button>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <input id="search" class="search" type="search" placeholder="施設名・府県で検索">
+      <button class="btn active" data-filter="all">全部</button>
+      <button class="btn" data-filter="main">メイン34</button>
+      <button class="btn" data-filter="extra">EXTRA 5</button>
+      <button id="demoBtn" class="btn">デモモード OFF</button>
+      <button id="exportBtn" class="btn">CSV出力</button>
+      <button id="importBtn" class="btn">CSV読込</button>
+      <input id="csvInput" type="file" accept=".csv,text/csv" class="hidden">
+    </div>
+
+    <section class="note">
+      <strong>使い方</strong><br>
+      丸いスタンプ枠をタップすると、そのモールの詳細データが開きます。スタンプ色は難易度で分かれています。C=紫、B=黄、A=青、S=赤。
+    </section>
+
+    <section class="card-frame">
+      <div class="frame-head">
+        <strong>目標が達成できたらスタンプがもらえるよ♪</strong>
+        <span>5 × 8 のスタンプカード（39施設＋予備1）</span>
+      </div>
+      <div id="stampGrid" class="grid"></div>
+      <div class="legend">
+        <span><i class="c"></i>C（紫）</span>
+        <span><i class="b"></i>B（黄）</span>
+        <span><i class="a"></i>A（青）</span>
+        <span><i class="s"></i>S（赤）</span>
+      </div>
+    </section>
+  </section>
+</main>
+
+<button id="installBtn" class="btn primary install hidden">ホーム画面に追加</button>
+
+<dialog id="detailDialog">
+  <form method="dialog" class="modal">
+    <button class="close" value="cancel" aria-label="閉じる">×</button>
+    <p class="smallnote" id="modalStage"></p>
+    <h2 id="modalName"></h2>
+
+    <div class="meta">
+      <span class="badge" id="modalPref"></span>
+      <span class="badge" id="modalDifficulty"></span>
+      <span class="badge" id="modalStatus"></span>
+    </div>
+
+    <div class="detail-top-grid">
+      <div class="box">
+        <div class="actions">
+          <button type="button" id="checkStartBtn" class="btn">開始位置を確認</button>
+        </div>
+        <p class="smallnote" id="locationMsg">位置情報はボタンを押した時だけ取得します。</p>
+        <p class="location-result" id="locationResult"></p>
+
+        <div id="fallbackBox" class="fallback-box hidden">
+          <strong>位置情報を取得できない場合</strong>
+          <label>
+            <input type="checkbox" id="manualLocationCheck">
+            <span>現在、このモール館内または施設付近にいます。</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="timer" id="timerText">60:00</div>
+        <div class="actions">
+          <button type="button" id="startWalkBtn" class="btn primary">ウォーキング開始</button>
+          <button type="button" id="fastForwardBtn" class="btn">試作：5秒で達成</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-fields">
+      <label>訪問日
+        <input id="dateInput" type="date">
+      </label>
+      <label>歩行時間（分）
+        <input id="minutesInput" type="number" min="60" step="1" value="60">
+      </label>
+      <label>周回数
+        <input id="lapsInput" type="number" min="0" step="1" placeholder="例 4">
+      </label>
+      <label>距離（km）
+        <input id="distanceInput" type="number" min="0" step="0.1" placeholder="例 4.8">
+      </label>
+
+      <label>歩数
+        <input id="stepsInput" type="number" min="0" step="1" placeholder="例 6800">
+      </label>
+      <label>1周の距離
+        <input id="lapDistanceInput" type="number" min="0" step="0.01" placeholder="例 1.20">
+      </label>
+      <label>1周の歩数
+        <input id="lapStepsInput" type="number" min="0" step="1" placeholder="例 1700">
+      </label>
+      <label class="memo-field">メモ
+        <textarea id="memoInput" rows="2" placeholder="交通、混雑、コースなど"></textarea>
+      </label>
+    </div>
+
+    <div class="footer-actions">
+      <button type="button" id="saveBtn" class="btn primary">📍 現在地を確認してスタンプ</button>
+      <button type="button" id="deleteBtn" class="btn">この記録を削除</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="secretDialog">
+  <form method="dialog" class="modal">
+    <button class="close" value="cancel" aria-label="閉じる">×</button>
+    <p class="smallnote">SECRET ACHIEVEMENTS</p>
+    <h2>シークレット実績</h2>
+    <div class="box">
+      <p>未達成の実績は「？？？」のままです。達成した瞬間に内容が明かされます。</p>
+    </div>
+    <div id="secretList" class="secret-list"></div>
+  </form>
+</dialog>
+
+<script>
+const MALLS = [{"id": "kuwana", "name": "イオンモール桑名", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0722, "lng": 136.6829, "x": 871.0444180105953, "y": 104.99316395559767, "ox": 860.2, "oy": 111.2}, {"id": "toin", "name": "イオンモール東員", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0618, "lng": 136.5921, "x": 814.2756528249954, "y": 115.91615802982051, "ox": 826.9, "oy": 118.0}, {"id": "kitaoji", "name": "イオンモール北大路", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 35.0449, "lng": 135.7587, "x": 534.5608705626087, "y": 116.22683217677556, "ox": 520.7, "oy": 129.2}, {"id": "yokkaichi-kita", "name": "イオンモール四日市北", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0078, "lng": 136.6567, "x": 852.3799291644092, "y": 161.99067801458176, "ox": 850.6, "oy": 153.7}, {"id": "kusatsu", "name": "イオンモール草津", "pref": "滋賀", "stage": "main", "difficulty": "B", "lat": 34.9979, "lng": 135.9153, "x": 587.511997485175, "y": 156.98828777492187, "ox": 578.3, "oy": 160.2}, {"id": "kyoto-gojo", "name": "イオンモール京都五条", "pref": "京都", "stage": "main", "difficulty": "A", "lat": 34.9975, "lng": 135.7277, "x": 486.86021102128416, "y": 143.739327014674, "ox": 509.4, "oy": 160.5}, {"id": "kyoto", "name": "イオンモールKYOTO", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9835, "lng": 135.7548, "x": 532.998327445423, "y": 175.99417925371674, "ox": 519.3, "oy": 169.7}, {"id": "kyoto-katsuragawa", "name": "イオンモール京都桂川", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.9645, "lng": 135.7082, "x": 480.9591697779302, "y": 197.84565020503058, "ox": 502.2, "oy": 182.3}, {"id": "kasai-hojo", "name": "イオンモール加西北条", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.9298, "lng": 134.841, "x": 183.6, "y": 205.2, "ox": 183.6, "oy": 205.2}, {"id": "inagawa", "name": "イオンモール猪名川", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.904, "lng": 135.363, "x": 374.7738036897703, "y": 221.43137551760375, "ox": 375.4, "oy": 222.2}, {"id": "kumiyama", "name": "イオンモール久御山", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9008, "lng": 135.7501, "x": 524.609423707579, "y": 235.4057235748812, "ox": 517.6, "oy": 224.3}, {"id": "suzuka", "name": "イオンモール鈴鹿", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.871, "lng": 136.531, "x": 804.4, "y": 244.0, "ox": 804.4, "oy": 244.0}, {"id": "kobe-kita", "name": "イオンモール神戸北", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.8596, "lng": 135.192, "x": 309.2516176336163, "y": 249.22644828125308, "ox": 312.6, "oy": 251.5}, {"id": "ibaraki", "name": "イオンモール茨木", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.8098, "lng": 135.5589, "x": 466.3961302499756, "y": 265.2834813376406, "ox": 447.4, "oy": 284.4}, {"id": "himeji-otsu", "name": "イオンモール姫路大津", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.8088, "lng": 134.6065, "x": 82.22906364174426, "y": 281.14831032834627, "ox": 97.5, "oy": 285.1}, {"id": "himeji-rivercity", "name": "イオンモール姫路リバーシティー", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7998, "lng": 134.6687, "x": 135.5709363582557, "y": 294.95168967165375, "ox": 120.3, "oy": 291.0}, {"id": "itami-koya", "name": "イオンモール伊丹昆陽", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7875, "lng": 135.3878, "x": 359.0813796836775, "y": 283.0574373657957, "ox": 384.5, "oy": 299.1}, {"id": "itami", "name": "イオンモール伊丹", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.7805, "lng": 135.4212, "x": 389.2654434288557, "y": 323.1933098200357, "ox": 396.8, "oy": 303.7}, {"id": "dainichi", "name": "イオンモール大日", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.7484, "lng": 135.5808, "x": 442.8064909750833, "y": 318.54457255764174, "ox": 455.4, "oy": 324.9}, {"id": "shijonawate", "name": "イオンモール四條畷", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.741, "lng": 135.639, "x": 493.55488024900706, "y": 315.5690825301963, "ox": 476.8, "oy": 329.8}, {"id": "naratomigaoka", "name": "イオンモール奈良登美ヶ丘", "pref": "奈良", "stage": "main", "difficulty": "C", "lat": 34.7265, "lng": 135.7524, "x": 515.6664624579115, "y": 362.1085608549797, "ox": 518.4, "oy": 339.4}, {"id": "takanohara", "name": "イオンモール高の原", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.7227, "lng": 135.7895, "x": 552.8991549332081, "y": 326.2501570190203, "ox": 532.1, "oy": 341.9}, {"id": "tsurumiryokuchi", "name": "イオンモール鶴見緑地", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.7042, "lng": 135.5661, "x": 459.25740617897105, "y": 367.1085870329015, "ox": 450.0, "oy": 354.1}, {"id": "tsuminami", "name": "イオンモール津南", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.6702, "lng": 136.5178, "x": 799.6, "y": 376.6, "ox": 799.6, "oy": 376.6}, {"id": "osaka-dome", "name": "イオンモール大阪ドームシティ", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.6692, "lng": 135.478, "x": 403.4554975223524, "y": 379.21706438583584, "ox": 417.6, "oy": 377.2}, {"id": "kobe-minami", "name": "イオンモール神戸南", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.6626, "lng": 135.1747, "x": 300.5188857533891, "y": 396.60936356512013, "ox": 306.2, "oy": 381.6}, {"id": "yamatokoriyama", "name": "イオンモール大和郡山", "pref": "奈良", "stage": "main", "difficulty": "B", "lat": 34.6418, "lng": 135.7976, "x": 543.2636090664047, "y": 409.4765171731406, "ox": 535.0, "oy": 395.3}, {"id": "sakaiteppocho", "name": "イオンモール堺鉄砲町", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.5927, "lng": 135.4819, "x": 394.3896707759679, "y": 439.2112399085922, "ox": 419.1, "oy": 427.7}, {"id": "sakaikitahanada", "name": "イオンモール堺北花田", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.5836, "lng": 135.5161, "x": 442.2767870492829, "y": 422.3979777531613, "ox": 431.6, "oy": 433.7}, {"id": "meiwa", "name": "イオンモール明和", "pref": "三重", "stage": "main", "difficulty": "S", "lat": 34.5538, "lng": 136.6083, "x": 832.8, "y": 453.4, "ox": 832.8, "oy": 453.4}, {"id": "kashihara", "name": "イオンモール橿原", "pref": "奈良", "stage": "main", "difficulty": "A", "lat": 34.5097, "lng": 135.7922, "x": 533.8805371158813, "y": 482.80708060060226, "ox": 533.1, "oy": 482.5}, {"id": "hineno", "name": "イオンモール日根野", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.39, "lng": 135.3303, "x": 377.9190786705441, "y": 554.8290835046025, "ox": 363.4, "oy": 561.6}, {"id": "rinkusennan", "name": "イオンモールりんくう泉南", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.3753, "lng": 135.2737, "x": 328.0809213294559, "y": 578.0709164953975, "ox": 342.6, "oy": 571.3}, {"id": "wakayama", "name": "イオンモール和歌山", "pref": "和歌山", "stage": "main", "difficulty": "C", "lat": 34.2762, "lng": 135.148, "x": 296.4, "y": 636.7, "ox": 296.4, "oy": 636.7}, {"id": "senrito", "name": "イオンSENRITO専門館", "pref": "大阪", "stage": "extra", "difficulty": "C", "lat": 34.8091, "lng": 135.4957, "x": 413.6599926883455, "y": 269.1628332722796, "ox": 424.1, "oy": 284.9}, {"id": "fujiidera", "name": "イオン藤井寺ショッピングセンター", "pref": "大阪", "stage": "extra", "difficulty": "B", "lat": 34.5711, "lng": 135.5947, "x": 476.5211363016897, "y": 460.2542745893196, "ox": 460.5, "oy": 442.0}, {"id": "akashi-sc", "name": "イオン明石ショッピングセンター", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6817, "lng": 134.9382, "x": 193.94615384615392, "y": 369.0, "ox": 219.3, "oy": 369.0}, {"id": "akashi-vivre", "name": "明石ビブレ", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6816, "lng": 134.9387, "x": 244.8538461538461, "y": 369.0, "ox": 219.5, "oy": 369.0}, {"id": "sannomiya-opa2", "name": "三宮オーパ2", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.695, "lng": 135.1967, "x": 319.9811142466109, "y": 345.1906364348799, "ox": 314.3, "oy": 360.2}];
+const STORAGE_KEY = "aeon_stamp_card_v6";
+const GOAL_KEY = "aeon_stamp_card_goal_v6";
+const SECRET_KEY = "aeon_secret_set_v11";
+let records = (() => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; } })();
+let current = null;
+let currentFilter = "all";
+let demoMode = false;
+let deferredPrompt = null;
+let walkTimer = null;
+let remaining = 3600;
+let walkDone = false;
+let startOK = false;
+let endOK = false;
+let locationFallbackUsed = false;
+
+const $ = s => document.querySelector(s);
+
+const SECRET_POOL = [
+  {id:"double_day", title:"一日二城", desc:"同じ日に2つ以上のモールを攻略する", test:()=>sameDayCount()>=2},
+  {id:"long_walk", title:"歩きすぎ注意報", desc:"1回で90分以上歩く", test:()=>maxField("minutes")>=90},
+  {id:"ten_km", title:"十キロの壁", desc:"1回で10km以上歩く", test:()=>maxField("distance")>=10},
+  {id:"eight_laps", title:"ぐるぐるマスター", desc:"1回で8周以上歩く", test:()=>maxField("laps")>=8},
+  {id:"s_clear", title:"最難関突破", desc:"難易度Sのモールを攻略する", test:()=>MALLS.some(m=>m.difficulty==="S" && rec(m.id).cleared)},
+  {id:"mie_three", title:"伊勢路へ", desc:"三重県のメインモールを3つ攻略する", test:()=>prefDoneCount("三重")>=3},
+  {id:"osaka_five", title:"大阪横断", desc:"大阪府のメインモールを5つ攻略する", test:()=>prefDoneCount("大阪")>=5},
+  {id:"hyogo_five", title:"播磨から阪神へ", desc:"兵庫県のメインモールを5つ攻略する", test:()=>prefDoneCount("兵庫")>=5},
+  {id:"extra_three", title:"裏街道", desc:"EXTRAを3施設攻略する", test:()=>MALLS.filter(m=>m.stage==="extra" && rec(m.id).cleared).length>=3},
+  {id:"all_ranks", title:"四色制覇", desc:"C・B・A・Sを各1施設以上攻略する", test:()=>["C","B","A","S"].every(d=>MALLS.some(m=>m.difficulty===d && rec(m.id).cleared))}
+];
+
+function getSecretSet(){
+  let ids = [];
+  try{ ids = JSON.parse(localStorage.getItem(SECRET_KEY) || "[]"); }catch(e){}
+  if(!Array.isArray(ids) || ids.length!==5){
+    const pool = [...SECRET_POOL];
+    ids = [];
+    while(ids.length<5 && pool.length){
+      const i = Math.floor(Math.random()*pool.length);
+      ids.push(pool.splice(i,1)[0].id);
+    }
+    localStorage.setItem(SECRET_KEY, JSON.stringify(ids));
+  }
+  return ids.map(id=>SECRET_POOL.find(x=>x.id===id)).filter(Boolean);
+}
+
+function maxField(field){
+  const vals = Object.values(records).filter(r=>r.cleared).map(r=>Number(r[field])||0);
+  return vals.length ? Math.max(...vals) : 0;
+}
+function sameDayCount(){
+  const count = {};
+  Object.values(records).filter(r=>r.cleared && r.date).forEach(r=>count[r.date]=(count[r.date]||0)+1);
+  return Math.max(0, ...Object.values(count));
+}
+function prefDoneCount(pref){
+  return MALLS.filter(m=>m.stage==="main" && m.pref===pref && rec(m.id).cleared).length;
+}
+
+
+function rec(id) { return records[id] || {}; }
+function saveAll() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  render();
+}
+function today() { return new Date().toISOString().slice(0,10); }
+function vibratePattern() { try { if (navigator.vibrate) navigator.vibrate([40,25,60]); } catch(e){} }
+
+function splitMallName(name) {
+  if (name.startsWith("イオンモール")) {
+    return ["イオンモール", name.replace(/^イオンモール/, "")];
+  }
+  if (name.startsWith("イオン")) {
+    return ["イオン", name.replace(/^イオン/, "").trim()];
+  }
+  return ["", name];
+}
+
+function filteredMalls() {
+  const q = $("#search").value.trim().toLowerCase();
+  return MALLS.filter(m => currentFilter === "all" || m.stage === currentFilter)
+              .filter(m => (m.name + m.pref).toLowerCase().includes(q));
+}
+
+function renderStats() {
+  const mains = MALLS.filter(m => m.stage === "main");
+  const extras = MALLS.filter(m => m.stage === "extra");
+  $("#clearMain").textContent = mains.filter(m => rec(m.id).cleared).length;
+  $("#clearExtra").textContent = extras.filter(m => rec(m.id).cleared).length;
+
+  const all = Object.entries(records).filter(([id,r]) => r.cleared);
+  $("#totalDistance").textContent = all.reduce((s,[id,r]) => s + (Number(r.distance) || 0), 0).toFixed(1);
+  $("#totalLaps").textContent = all.reduce((s,[id,r]) => s + (Number(r.laps) || 0), 0);
+
+  // prefecture completes
+  const prefs = [...new Set(mains.map(m=>m.pref))];
+  const prefBox = $("#prefComplete");
+  prefBox.innerHTML = "";
+  prefs.forEach(pref=>{
+    const targets = mains.filter(m=>m.pref===pref);
+    const done = targets.length>0 && targets.every(m=>rec(m.id).cleared);
+    const chip = document.createElement("span");
+    chip.className = "pref-chip" + (done ? " done" : "");
+    chip.textContent = done ? pref+" COMPLETE" : pref;
+    prefBox.appendChild(chip);
+  });
+
+  // MY BEST
+  const getMallName = id => (MALLS.find(m=>m.id===id)||{}).name || "—";
+  if(all.length){
+    const timeBest = [...all].sort((a,b)=>(Number(b[1].minutes)||0)-(Number(a[1].minutes)||0))[0];
+    const lapsBest = [...all].sort((a,b)=>(Number(b[1].laps)||0)-(Number(a[1].laps)||0))[0];
+    const distBest = [...all].sort((a,b)=>(Number(b[1].distance)||0)-(Number(a[1].distance)||0))[0];
+
+    $("#bestTime").textContent = `${getMallName(timeBest[0])} ${Number(timeBest[1].minutes)||0}分`;
+    $("#bestLaps").textContent = `${getMallName(lapsBest[0])} ${Number(lapsBest[1].laps)||0}周`;
+    $("#bestDistance").textContent = `${getMallName(distBest[0])} ${(Number(distBest[1].distance)||0).toFixed(1)}km`;
+  }else{
+    $("#bestTime").textContent = "—";
+    $("#bestLaps").textContent = "—";
+    $("#bestDistance").textContent = "—";
+  }
+}
+
+function makeSpot(mall) {
+  const r = rec(mall.id);
+  const btn = document.createElement("button");
+  btn.type = "button";
+  const topBottom = splitMallName(mall.name);
+  const label = mall.stage === "main"
+      ? MALLS.filter(x => x.stage === "main").indexOf(mall) + 1
+      : "E" + (MALLS.filter(x => x.stage === "extra").indexOf(mall) + 1);
+
+  btn.className = "spot " + mall.stage + " diff-" + mall.difficulty + (r.cleared ? " done" : "");
+  btn.dataset.id = mall.id;
+  btn.innerHTML = `
+    <span class="num">${label}</span>
+    ${topBottom[0] ? `<span class="name-top">${topBottom[0]}</span>` : ``}
+    <span class="name-bottom">${topBottom[1]}</span>
+  `;
+  btn.addEventListener("click", () => openDetail(mall));
+  return btn;
+}
+
+function renderGrid() {
+  const grid = $("#stampGrid");
+  grid.innerHTML = "";
+  const items = filteredMalls();
+  items.forEach(mall => grid.appendChild(makeSpot(mall)));
+  const needPad = Math.max(0, 40 - items.length);
+  for (let i = 0; i < needPad; i++) {
+    const d = document.createElement("div");
+    d.className = "spot empty";
+    d.innerHTML = `<span class="name-bottom">${i===needPad-1 && items.length===39 ? "COMPLETE!" : ""}</span>`;
+    grid.appendChild(d);
+  }
+}
+
+function render() {
+  renderStats();
+  renderGrid();
+}
+
+function resetWalkState() {
+  clearInterval(walkTimer);
+  remaining = 3600;
+  walkDone = false;
+  startOK = demoMode;
+  endOK = false;
+  locationFallbackUsed = false;
+  $("#timerText").textContent = "60:00";
+  $("#manualLocationCheck").checked = false;
+  $("#fallbackBox").classList.add("hidden");
+  $("#locationResult").textContent = "";
+  $("#locationMsg").textContent = demoMode ? "デモモード：位置確認を省略できます。" : "60分達成後、スタンプボタンを押した時だけ現在地を確認します。";
+}
+
+function openDetail(mall) {
+  current = mall;
+  resetWalkState();
+  const r = rec(mall.id);
+  $("#modalStage").textContent = mall.stage === "main" ? "MAIN STAGE" : "EXTRA STAGE";
+  $("#modalName").textContent = mall.name;
+  $("#modalPref").textContent = mall.pref;
+  $("#modalDifficulty").textContent = "難易度 " + mall.difficulty;
+  $("#modalStatus").textContent = r.cleared ? "攻略済み" : "未攻略";
+  $("#dateInput").value = r.date || today();
+  $("#minutesInput").value = r.minutes || 60;
+  $("#lapsInput").value = r.laps || "";
+  $("#distanceInput").value = r.distance || "";
+  $("#stepsInput").value = r.steps || "";
+  $("#lapDistanceInput").value = r.lapDistance || "";
+  $("#lapStepsInput").value = r.lapSteps || "";
+  $("#memoInput").value = r.memo || "";
+  $("#detailDialog").showModal();
+}
+
+function updateTimer() {
+  const m = Math.floor(remaining / 60), s = remaining % 60;
+  $("#timerText").textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function startTimer(seconds) {
+  clearInterval(walkTimer);
+  remaining = seconds;
+  walkDone = false;
+  updateTimer();
+  walkTimer = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(walkTimer);
+      remaining = 0;
+      walkDone = true;
+      $("#timerText").textContent = "60分達成";
+      endOK = false;
+      $("#locationMsg").textContent = "60分達成。下の「現在地を確認してスタンプ」を押してください。";
+      $("#locationResult").textContent = "";
+      $("#fallbackBox").classList.add("hidden");
+      return;
+    }
+    updateTimer();
+  }, 1000);
+}
+
+$("#startWalkBtn").addEventListener("click", () => {
+  if (!demoMode && !startOK) {
+    alert("通常モードでは先に開始位置を確認してください。");
+    return;
+  }
+  startTimer(3600);
+});
+$("#fastForwardBtn").addEventListener("click", () => {
+  if (!demoMode && !startOK) {
+    alert("通常モードでは先に開始位置を確認してください。");
+    return;
+  }
+  startTimer(5);
+});
+
+
+function distanceMeters(lat1, lon1, lat2, lon2){
+  const R = 6371000;
+  const toRad = d => d * Math.PI / 180;
+  const p1 = toRad(lat1), p2 = toRad(lat2);
+  const dp = toRad(lat2-lat1), dl = toRad(lon2-lon1);
+  const a = Math.sin(dp/2)**2 + Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+function checkEndLocationAutomatically(){
+  if (demoMode){
+    endOK = true;
+    $("#locationMsg").textContent = "デモモード：60分達成後の位置確認を省略しました。";
+    $("#locationResult").textContent = "位置確認：OK（デモ）";
+    return;
+  }
+
+  $("#locationMsg").textContent = "60分達成。現在地を確認しています…";
+  $("#locationResult").textContent = "";
+  $("#fallbackBox").classList.add("hidden");
+
+  if (!window.isSecureContext || !navigator.geolocation){
+    showLocationFallback("この環境では位置情報を利用できません。");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    const d = distanceMeters(
+      pos.coords.latitude, pos.coords.longitude,
+      current.lat, current.lng
+    );
+    const accuracy = Math.round(pos.coords.accuracy || 0);
+
+    if (d <= 300){
+      endOK = true;
+      locationFallbackUsed = false;
+      $("#locationMsg").textContent = "現在地を確認しました。";
+      $("#locationResult").textContent = `モール中心から約${Math.round(d)}m / 精度±${accuracy}m`;
+      $("#fallbackBox").classList.add("hidden");
+    } else {
+      endOK = false;
+      $("#locationMsg").textContent = "現在地がモール付近と確認できませんでした。";
+      $("#locationResult").textContent = `モール中心から約${Math.round(d)}m / 精度±${accuracy}m`;
+      showLocationFallback("屋内GPSのずれなどの可能性があります。");
+    }
+  }, err => {
+    let reason = "位置情報を取得できませんでした。";
+    if (err && err.code === 1) reason = "位置情報の利用が許可されていません。";
+    if (err && err.code === 2) reason = "現在地を取得できませんでした。";
+    if (err && err.code === 3) reason = "位置情報の取得がタイムアウトしました。";
+    showLocationFallback(reason);
+  }, {
+    enableHighAccuracy:true,
+    timeout:15000,
+    maximumAge:0
+  });
+}
+
+function showLocationFallback(reason){
+  endOK = false;
+  $("#locationMsg").textContent = reason;
+  $("#locationResult").textContent = "手動確認を利用できます。";
+  $("#fallbackBox").classList.remove("hidden");
+}
+
+function geoCheck(type) {
+  if (demoMode) {
+    if (type === "start") {
+      startOK = true;
+      $("#locationMsg").textContent = "デモモード：開始位置OK";
+    } else {
+      endOK = true;
+      locationFallbackUsed = false;
+      $("#locationMsg").textContent = "デモモード：終了位置OK";
+      $("#fallbackBox").classList.add("hidden");
+    }
+    return;
+  }
+
+  if (type === "end") {
+    checkEndLocationAutomatically();
+    return;
+  }
+
+  if (!window.isSecureContext || !navigator.geolocation) {
+    $("#locationMsg").textContent = "本番ではGitHub Pages上（HTTPS）で位置確認ができます。";
+    return;
+  }
+
+  $("#locationMsg").textContent = "開始位置を確認中…";
+  navigator.geolocation.getCurrentPosition(pos => {
+    const d = distanceMeters(
+      pos.coords.latitude, pos.coords.longitude,
+      current.lat, current.lng
+    );
+    const accuracy = Math.round(pos.coords.accuracy || 0);
+
+    if (d <= 300){
+      startOK = true;
+      $("#locationMsg").textContent = "開始位置OK";
+      $("#locationResult").textContent = `モール中心から約${Math.round(d)}m / 精度±${accuracy}m`;
+    } else {
+      startOK = false;
+      $("#locationMsg").textContent = "開始位置がモール付近と確認できませんでした。";
+      $("#locationResult").textContent = `モール中心から約${Math.round(d)}m / 精度±${accuracy}m`;
+    }
+  }, () => {
+    $("#locationMsg").textContent = "開始位置を取得できませんでした。";
+  }, {enableHighAccuracy:true, timeout:15000, maximumAge:0});
+}
+
+
+$("#manualLocationCheck").addEventListener("change", () => {
+  if ($("#manualLocationCheck").checked) {
+    locationFallbackUsed = true;
+    $("#locationResult").textContent = "手動確認で現地滞在を確認しました。もう一度スタンプボタンを押してください。";
+  } else {
+    locationFallbackUsed = false;
+    $("#locationResult").textContent = "手動確認を利用できます。";
+  }
+});
+
+$("#checkStartBtn").addEventListener("click", () => geoCheck("start"));
+
+function animateStamp(id) {
+  const el = document.querySelector(`.spot[data-id="${id}"]`);
+  if (!el) return;
+  el.classList.remove("stamp-anim");
+  void el.offsetWidth;
+  el.classList.add("stamp-anim");
+  setTimeout(() => el.classList.remove("stamp-anim"), 650);
+}
+
+function finalizeStamp(locationMethod){
+  records[current.id] = {
+    cleared: true,
+    date: $("#dateInput").value || today(),
+    minutes: Math.max(60, Number($("#minutesInput").value || 60)),
+    laps: Number($("#lapsInput").value || 0),
+    distance: Number($("#distanceInput").value || 0),
+    steps: Number($("#stepsInput").value || 0),
+    lapDistance: Number($("#lapDistanceInput").value || 0),
+    lapSteps: Number($("#lapStepsInput").value || 0),
+    memo: $("#memoInput").value.trim(),
+    locationCheck: locationMethod
+  };
+  const stampedId = current.id;
+  saveAll();
+  $("#detailDialog").close();
+  vibratePattern();
+  setTimeout(() => animateStamp(stampedId), 80);
+}
+
+$("#saveBtn").addEventListener("click", () => {
+  if (!current) return;
+
+  if (!walkDone) {
+    alert("まず60分以上のウォーキングを完了してください。試作では『5秒で60分達成』も使えます。");
+    return;
+  }
+
+  if (demoMode) {
+    finalizeStamp("demo");
+    return;
+  }
+
+  // If GPS failed previously and the user manually confirmed presence, allow manual stamp.
+  if (locationFallbackUsed && $("#manualLocationCheck").checked) {
+    finalizeStamp("manual");
+    return;
+  }
+
+  // GPS is requested ONLY when the user presses this stamp button.
+  if (!window.isSecureContext || !navigator.geolocation) {
+    showLocationFallback("この環境では位置情報を利用できません。");
+    return;
+  }
+
+  $("#locationMsg").textContent = "現在地を確認しています…";
+  $("#locationResult").textContent = "";
+  $("#fallbackBox").classList.add("hidden");
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    const d = distanceMeters(
+      pos.coords.latitude, pos.coords.longitude,
+      current.lat, current.lng
+    );
+    const accuracy = Math.round(pos.coords.accuracy || 0);
+
+    $("#locationResult").textContent = `モール中心から約${Math.round(d)}m / 精度±${accuracy}m`;
+
+    if (d <= 300) {
+      endOK = true;
+      locationFallbackUsed = false;
+      $("#locationMsg").textContent = "現在地を確認しました。スタンプを押します。";
+      finalizeStamp("gps");
+    } else {
+      endOK = false;
+      $("#locationMsg").textContent = "現在地がモール付近と確認できませんでした。";
+      showLocationFallback("屋内GPSのずれなどの可能性があります。");
+    }
+  }, err => {
+    let reason = "位置情報を取得できませんでした。";
+    if (err && err.code === 1) reason = "位置情報の利用が許可されていません。";
+    if (err && err.code === 2) reason = "現在地を取得できませんでした。";
+    if (err && err.code === 3) reason = "位置情報の取得がタイムアウトしました。";
+    showLocationFallback(reason);
+  }, {
+    enableHighAccuracy: true,
+    timeout: 15000,
+    maximumAge: 0
+  });
+});
+
+$("#deleteBtn").addEventListener("click", () => {
+  if (!current) return;
+  if (confirm("このモールの記録を削除しますか？")) {
+    delete records[current.id];
+    saveAll();
+    $("#detailDialog").close();
+  }
+});
+
+document.querySelectorAll("[data-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.filter;
+    renderGrid();
+  });
+});
+
+$("#search").addEventListener("input", renderGrid);
+
+$("#demoBtn").addEventListener("click", () => {
+  demoMode = !demoMode;
+  $("#demoBtn").textContent = "デモモード " + (demoMode ? "ON" : "OFF");
+  $("#demoBtn").classList.toggle("active", demoMode);
+});
+
+/* CSV */
+function csvEscape(v) {
+  const s = String(v ?? "");
+  if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+$("#exportBtn").addEventListener("click", () => {
+  const headers = ["id","name","pref","stage","difficulty","cleared","date","minutes","laps","distance","steps","lapDistance","lapSteps","memo","locationCheck"];
+  const rows = [headers.join(",")];
+  MALLS.forEach(m => {
+    const r = rec(m.id);
+    rows.push([
+      m.id, m.name, m.pref, m.stage, m.difficulty,
+      !!r.cleared, r.date || "", r.minutes || "", r.laps || "", r.distance || "",
+      r.steps || "", r.lapDistance || "", r.lapSteps || "", r.memo || "", r.locationCheck || ""
+    ].map(csvEscape).join(","));
+  });
+  const blob = new Blob(["\ufeff" + rows.join("\n")], {type:"text/csv;charset=utf-8;"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "aeon_mall_walking_records.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) {
+      if (ch === '"') {
+        if (text[i+1] === '"') { cell += '"'; i++; }
+        else q = false;
+      } else {
+        cell += ch;
+      }
+    } else {
+      if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+      else if (ch === "\r") { }
+      else { cell += ch; }
+    }
+  }
+  row.push(cell);
+  rows.push(row);
+  return rows.filter(r => r.length && !(r.length===1 && r[0]===""));
+}
+
+$("#importBtn").addEventListener("click", () => $("#csvInput").click());
+$("#csvInput").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const text = await file.text();
+  const rows = parseCSV(text);
+  if (rows.length < 2) {
+    alert("CSVにデータがありません。");
+    return;
+  }
+  const header = rows[0];
+  const idx = Object.fromEntries(header.map((h,i) => [h, i]));
+  const next = {};
+  for (const row of rows.slice(1)) {
+    const id = row[idx.id];
+    if (!id) continue;
+    next[id] = {
+      cleared: row[idx.cleared] === "true" || row[idx.cleared] === "TRUE",
+      date: row[idx.date] || "",
+      minutes: Number(row[idx.minutes] || 0),
+      laps: Number(row[idx.laps] || 0),
+      distance: Number(row[idx.distance] || 0),
+      steps: Number(row[idx.steps] || 0),
+      lapDistance: Number(row[idx.lapDistance] || 0),
+      lapSteps: Number(row[idx.lapSteps] || 0),
+      memo: row[idx.memo] || "",
+      locationCheck: idx.locationCheck !== undefined ? (row[idx.locationCheck] || "") : ""
+    };
+  }
+  records = next;
+  saveAll();
+  alert("CSVを読み込みました。");
+  e.target.value = "";
+});
+
+$("#goalInput").value = localStorage.getItem(GOAL_KEY) || "";
+$("#goalInput").addEventListener("input", () => localStorage.setItem(GOAL_KEY, $("#goalInput").value));
+
+
+function renderSecrets(){
+  const list = $("#secretList");
+  list.innerHTML = "";
+  getSecretSet().forEach(s=>{
+    const achieved = !!s.test();
+    const div = document.createElement("div");
+    div.className = "secret-item" + (achieved ? "" : " locked");
+    div.innerHTML = achieved
+      ? `<div class="secret-title">${s.title}<span class="secret-badge">解除</span></div><div class="secret-desc">${s.desc}</div>`
+      : `<div class="secret-title">？？？</div><div class="secret-desc">条件を満たすと内容が明かされます。</div>`;
+    list.appendChild(div);
+  });
+}
+
+$("#secretBtn").addEventListener("click", ()=>{
+  try{
+    renderSecrets();
+    const dlg = $("#secretDialog");
+    if (typeof dlg.showModal === "function") {
+      dlg.showModal();
+    } else {
+      dlg.setAttribute("open","");
+    }
+  }catch(err){
+    console.error(err);
+    alert("シークレット実績を開けませんでした。ページを再読み込みしてください。");
+  }
+});
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  $("#installBtn").classList.remove("hidden");
+});
+$("#installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt = null;
+  $("#installBtn").classList.add("hidden");
+});
+
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
+}
+
+render();
+</script>
+</body>
+</html>

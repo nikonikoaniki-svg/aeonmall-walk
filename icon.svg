@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="96" fill="#f7fbff"/>
+<circle cx="154" cy="170" r="70" fill="#8e7be8"/>
+<circle cx="358" cy="170" r="70" fill="#f1cf58"/>
+<circle cx="154" cy="346" r="70" fill="#65a9f4"/>
+<circle cx="358" cy="346" r="78" fill="#ef6767"/>
+<text x="358" y="360" text-anchor="middle" font-size="60" font-family="sans-serif" font-weight="900" fill="white">済</text>
+</svg>
