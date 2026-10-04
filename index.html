@@ -791,6 +791,129 @@ textarea { resize:vertical; }
   }
 }
 
+
+/* ===== V25 smartphone detail modal ===== */
+@media(max-width:820px){
+  #detailDialog{
+    width:100vw !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:8px !important;
+  }
+  #detailDialog .modal{
+    width:100% !important;
+    max-width:none !important;
+    max-height:94vh !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    border-radius:24px !important;
+    padding:18px 16px 20px !important;
+  }
+  #detailDialog .modal h2{
+    font-size:28px !important;
+    line-height:1.12 !important;
+    margin:0 52px 10px 0 !important;
+  }
+  #detailDialog .smallnote{
+    font-size:12px !important;
+  }
+  #detailDialog .badge{
+    font-size:13px !important;
+    padding:6px 11px !important;
+  }
+  #detailDialog .detail-top-grid{
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  #detailDialog .box{
+    padding:12px !important;
+    border-radius:16px !important;
+  }
+  #detailDialog .timer{
+    font-size:48px !important;
+    margin:6px 0 10px !important;
+  }
+  #detailDialog .btn{
+    font-size:16px !important;
+    padding:12px 14px !important;
+    min-height:46px;
+  }
+  #detailDialog .detail-fields{
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+  #detailDialog .detail-fields label{
+    font-size:14px !important;
+  }
+  #detailDialog .detail-fields input,
+  #detailDialog .detail-fields textarea{
+    font-size:18px !important;
+    padding:12px 13px !important;
+    min-height:52px !important;
+    width:100% !important;
+    box-sizing:border-box !important;
+  }
+  #detailDialog .detail-fields textarea{
+    min-height:82px !important;
+    height:82px !important;
+  }
+  #detailDialog .detail-fields .memo-field{
+    grid-column:1 / -1 !important;
+  }
+  #detailDialog .footer-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  #detailDialog .footer-actions .btn{
+    width:100% !important;
+  }
+  .photo-pair{
+    display:grid;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+  .photo-card{
+    padding:12px !important;
+  }
+  .photo-card-title{
+    font-size:15px !important;
+  }
+  .photo-card .photo-preview{
+    width:100% !important;
+    height:160px !important;
+    object-fit:cover;
+  }
+}
+
+
+.photo-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:8px;
+}
+.photo-card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:9px;
+  background:#fbfdff;
+}
+.photo-card-title{
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:7px;
+  color:#4d6b7c;
+}
+.photo-card .photo-preview{
+  width:100%;
+  height:96px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#eef3f6;
+}
+
 </style>
 </head>
 <body>
@@ -906,7 +1029,6 @@ textarea { resize:vertical; }
       <label>距離（km）
         <input id="distanceInput" type="number" min="0" step="0.1" placeholder="例 4.8">
       </label>
-
       <label>歩数
         <input id="stepsInput" type="number" min="0" step="1" placeholder="例 6800">
       </label>
@@ -921,10 +1043,30 @@ textarea { resize:vertical; }
       </label>
     </div>
 
-    <div class="box" style="margin-top:6px">
-      <strong style="font-size:11px">コース案内板写真（1枚）</strong>
-      <div class="photo-tools"><img id="photoPreview" class="photo-preview" alt="コース案内板写真"><button type="button" id="photoBtn" class="btn">写真を登録</button><button type="button" id="photoDeleteBtn" class="btn">写真削除</button><input id="photoInput" type="file" accept="image/*" capture="environment" class="hidden"></div>
-      <p class="smallnote">START/GOALや距離が分かるモールウォーキング案内板を撮るのがおすすめです。</p>
+    <div class="box" style="margin-top:10px">
+      <strong style="font-size:13px">写真（各1枚）</strong>
+      <div class="photo-pair">
+        <div class="photo-card">
+          <div class="photo-card-title">① イオンモール外観</div>
+          <img id="photoExteriorPreview" class="photo-preview" alt="イオンモール外観写真">
+          <div class="photo-tools">
+            <button type="button" id="photoExteriorBtn" class="btn">外観写真を登録</button>
+            <button type="button" id="photoExteriorDeleteBtn" class="btn">削除</button>
+            <input id="photoExteriorInput" type="file" accept="image/*" capture="environment" class="hidden">
+          </div>
+        </div>
+
+        <div class="photo-card">
+          <div class="photo-card-title">② モールウォーク START／GOAL案内</div>
+          <img id="photoCoursePreview" class="photo-preview" alt="モールウォーク案内写真">
+          <div class="photo-tools">
+            <button type="button" id="photoCourseBtn" class="btn">案内写真を登録</button>
+            <button type="button" id="photoCourseDeleteBtn" class="btn">削除</button>
+            <input id="photoCourseInput" type="file" accept="image/*" capture="environment" class="hidden">
+          </div>
+        </div>
+      </div>
+      <p class="smallnote">外観と、START／GOALやコース距離が分かる案内板を1枚ずつ残せます。</p>
     </div>
 
     <div class="footer-actions">
@@ -1230,7 +1372,7 @@ function openDetail(mall) {
   $("#modalPref").textContent = mall.pref;
   $("#modalDifficulty").textContent = "難易度 " + mall.difficulty;
   $("#modalStatus").textContent = r.cleared ? "攻略済み" : "未攻略";
-  $("#dateInput").value = r.date || today();
+  $("#dateInput").value = (r.date && r.date.length >= 10) ? r.date : today();
   $("#minutesInput").value = r.minutes || 60;
   $("#lapsInput").value = r.laps || "";
   $("#distanceInput").value = r.distance || "";
@@ -1570,9 +1712,35 @@ $("#secretBtn")?.addEventListener("click", ()=>{
 });
 
 
-$("#photoBtn").addEventListener("click",()=>$("#photoInput").click());
-$("#photoInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f||!current)return;const b=await resizePhoto(f);await putPhoto(current.id,b);$("#photoPreview").src=URL.createObjectURL(b);e.target.value=""});
-$("#photoDeleteBtn").addEventListener("click",async()=>{if(!current)return;await deletePhoto(current.id);$("#photoPreview").removeAttribute("src")});
+
+$("#photoExteriorBtn")?.addEventListener("click",()=>$("#photoExteriorInput").click());
+$("#photoExteriorInput")?.addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f||!current) return;
+  const blob=await resizePhoto(f);
+  await putPhoto(current.id + ":exterior", blob);
+  $("#photoExteriorPreview").src=URL.createObjectURL(blob);
+  e.target.value="";
+});
+$("#photoExteriorDeleteBtn")?.addEventListener("click",async()=>{
+  if(!current) return;
+  await deletePhoto(current.id + ":exterior");
+  $("#photoExteriorPreview").removeAttribute("src");
+});
+
+$("#photoCourseBtn")?.addEventListener("click",()=>$("#photoCourseInput").click());
+$("#photoCourseInput")?.addEventListener("change",async e=>{
+  const f=e.target.files[0]; if(!f||!current) return;
+  const blob=await resizePhoto(f);
+  await putPhoto(current.id + ":course", blob);
+  $("#photoCoursePreview").src=URL.createObjectURL(blob);
+  e.target.value="";
+});
+$("#photoCourseDeleteBtn")?.addEventListener("click",async()=>{
+  if(!current) return;
+  await deletePhoto(current.id + ":course");
+  $("#photoCoursePreview").removeAttribute("src");
+});
+
 $("#albumBtn")?.addEventListener("click",async()=>{const g=$("#albumGrid");g.innerHTML="";for(const m of MALLS){const b=await getPhoto(m.id),c=document.createElement("div");c.className="album-card"+(b?"":" empty");const img=document.createElement("img");if(b)img.src=URL.createObjectURL(b);const cap=document.createElement("div");cap.className="cap";cap.textContent=m.name;c.append(img,cap);g.appendChild(c)}$("#albumDialog").showModal()});
 $("#clearAllBtn")?.addEventListener("click",()=>{if(!confirm("今まで押したスタンプをすべてクリアします。写真は残します。よろしいですか？"))return;records={};saveAll();alert("スタンプ記録をすべてクリアしました。")});
 $("#zipBackupBtn")?.addEventListener("click",async()=>{const enc=new TextEncoder(),entries=[{name:"records.csv",data:enc.encode(buildCsv())}];for(const [id,b] of await allPhotos())entries.push({name:`photos/${id}.jpg`,data:new Uint8Array(await b.arrayBuffer())});const z=await makeZip(entries),a=document.createElement("a");a.href=URL.createObjectURL(z);a.download=`aeon_mall_walking_full_backup_${today()}.zip`;a.click();URL.revokeObjectURL(a.href)});
