@@ -1,6 +1,6 @@
 {
-  "name": "イオンモールウォーキング 近畿制覇",
-  "short_name": "スタンプカード",
+  "name": "イオンモールウォーキング制覇（近畿版）",
+  "short_name": "近畿版",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f7fbff",

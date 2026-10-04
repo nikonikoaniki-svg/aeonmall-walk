@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#f7fbff">
-<title>イオンモールウォーキング 近畿制覇</title>
+<title>イオンモールウォーキング制覇（近畿版）</title>
 <link rel="manifest" href="./manifest.json">
 <style>
 :root {
@@ -42,25 +42,17 @@ main {
   grid-template-columns:auto 1fr;
   gap:8px;
   align-items:center;
-  margin-bottom:4px;
+  margin-bottom:2px;
 }
 .illust {
   width:46px; height:46px; border-radius:12px; border:1px solid var(--line);
   background:#f2fbff; display:grid; place-items:center; font-size:25px;
 }
 .title-block h1 {
-  margin:0 0 2px; font-size:21px; color:#5a87b9; letter-spacing:.04em; line-height:1.05;
-}
-.goal {
-  display:flex; gap:8px; align-items:center;
-}
-.goal label { font-weight:800; color:var(--sub); font-size:14px; }
-.goal input {
-  flex:1; min-width:0; padding:6px 10px; border:1px solid var(--line); border-radius:999px;
-  font-size:13px; background:#fcfeff;
+  margin:0; font-size:21px; color:#5a87b9; letter-spacing:.04em; line-height:1.05;
 }
 .info-bar {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin:5px 0;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin:4px 0;
 }
 .info-box {
   background:#fcfeff; border:1px solid var(--line); border-radius:14px; padding:5px 8px; text-align:center;
@@ -86,9 +78,9 @@ main {
 }
 .note strong { color:#4c7089; }
 .card-frame {
-  border:1.5px solid var(--line); border-radius:16px; padding:6px 8px 7px; background:#fcfeff;
+  border:1.5px solid var(--line); border-radius:16px; padding:5px 7px 6px; background:#fcfeff;
 }
-.frame-head { text-align:center; margin-bottom:3px; }
+.frame-head { text-align:center; margin-bottom:0; }
 .frame-head strong { display:block; font-size:12px; color:#5f8eae; line-height:1.1; }
 .frame-head span { font-size:10px; color:var(--sub); }
 .grid {
@@ -112,7 +104,7 @@ main {
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:5px 4px 7px;
+  padding:7px 5px 8px;
   position:relative;
   cursor:pointer;
   transition:transform .14s ease, box-shadow .14s ease, background .14s ease;
@@ -129,11 +121,23 @@ main {
   font-size:10px; font-weight:900; color:#587e9a;
 }
 .spot .name-top {
-  font-size:9px; line-height:1.0; font-weight:900; color:#243f50; letter-spacing:.01em;
+  font-size:11px;
+  line-height:1.0;
+  font-weight:900;
+  color:#243f50;
+  letter-spacing:.01em;
+  white-space:nowrap;
 }
 .spot .name-bottom {
-  font-size:10px; line-height:1.08; font-weight:900; color:#243f50; margin-top:2px;
+  font-size:12px;
+  line-height:1.05;
+  font-weight:900;
+  color:#243f50;
+  margin-top:3px;
   word-break:keep-all;
+  overflow-wrap:normal;
+  text-align:center;
+  max-width:88%;
 }
 .spot.extra { background:#d9e7f9; }
 .spot.diff-C { border-color:#8e7be8; }
@@ -296,8 +300,8 @@ textarea { resize:vertical; }
 .extras-row{
   display:grid;
   grid-template-columns:1fr 1.3fr auto;
-  gap:6px;
-  margin:4px 0;
+  gap:5px;
+  margin:3px 0;
 }
 .complete-box,.best-box,.secret-launch{
   background:#fcfeff;
@@ -486,6 +490,154 @@ textarea { resize:vertical; }
   }
 }
 
+
+/* V14 additions */
+.progress-next{margin:4px 0 6px;padding:7px 10px;border:1px solid var(--line);border-radius:12px;background:#fffdf4;font-size:12px;font-weight:900;color:#6a5730}
+.photo-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:5px}.photo-preview{width:86px;height:58px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#eef3f6}.album-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.album-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fbfdff;min-width:0}.album-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#edf2f5}.album-card .cap{padding:6px;font-size:10px;line-height:1.25;font-weight:800}.album-card.empty img{opacity:.2}.album-card.empty .cap{color:#91a2ac}@media(max-width:700px){.album-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.danger{border-color:#e68a8a!important;color:#a62a2a!important;background:#fff7f7!important}.choice-row{display:grid;gap:8px;margin-top:10px}.choice-row .btn{width:100%}
+.spot.done.stamp-sparkle::after{content:"✦";inset:auto 6px 4px auto;width:auto;height:auto;border:0;background:transparent;color:#fff;text-shadow:0 0 4px rgba(255,255,255,.9);font-size:18px}.spot.done.stamp-gold{box-shadow:0 0 0 4px #d5aa2d,0 5px 12px rgba(0,0,0,.14)}.spot.done.stamp-big{transform:scale(1.06);z-index:2}.spot.done.stamp-rare{box-shadow:0 0 0 3px #fff,0 0 0 6px #8b57d6,0 6px 14px rgba(98,51,161,.25)}.spot.done.stamp-rare::after{content:"★";inset:auto 6px 4px auto;width:auto;height:auto;border:0;background:transparent;color:#fff;font-size:17px}
+
+
+/* ===== V17 layout cleanup ===== */
+.title-block{position:relative;padding-right:150px}
+.about-top{
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:11px;
+  padding:6px 10px;
+  border-radius:999px;
+}
+.card-frame{
+  margin-top:2px;
+  flex:1;
+  min-height:0;
+  overflow:hidden;
+}
+.grid{
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  grid-template-rows:repeat(5,1fr);
+  gap:8px 10px !important;
+  align-items:center;
+  justify-items:center;
+  padding:4px 6px;
+}
+.spot{
+  width:min(11.2vw, 94px) !important;
+  height:min(11.2vw, 94px) !important;
+  min-width:66px !important;
+  min-height:66px !important;
+  max-width:98px !important;
+  max-height:98px !important;
+  aspect-ratio:1/1 !important;
+  flex:none !important;
+}
+@media(max-width:1100px){
+  .spot{
+    width:min(10.6vw, 88px) !important;
+    height:min(10.6vw, 88px) !important;
+    min-width:62px !important;
+    min-height:62px !important;
+  }
+  .grid{gap:7px 8px !important}
+}
+@media(max-width:900px){
+  .spot{
+    width:min(10.2vw, 82px) !important;
+    height:min(10.2vw, 82px) !important;
+    min-width:58px !important;
+    min-height:58px !important;
+  }
+  .grid{gap:6px 7px !important}
+}
+@media(max-width:820px){
+  .title-block{padding-right:0}
+  .about-top{position:static;margin-top:6px}
+  .grid{
+    grid-template-columns:repeat(5,1fr);
+    grid-template-rows:auto;
+    height:auto;
+    overflow:auto;
+  }
+  .spot{
+    width:84px !important;
+    height:84px !important;
+  }
+}
+.about-sections{display:grid;gap:10px}
+.about-section{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fbfdff;
+  padding:10px 12px;
+}
+.about-section h3{margin:0 0 5px;font-size:14px}
+.about-section p,.about-section li{
+  font-size:12px;
+  line-height:1.55;
+  color:#58707f;
+}
+.about-section ul{margin:4px 0 0 18px;padding:0}
+
+
+@media (min-width:821px) and (min-height:650px){
+  html,body{height:100%;overflow:hidden}
+  main{height:100vh}
+  .sheet{
+    height:calc(100vh - 12px);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .card-frame{
+    flex:1 1 auto;
+    min-height:0;
+  }
+  .grid{
+    flex:1 1 auto;
+    min-height:0;
+  }
+}
+
+
+.spot .name-bottom.long{
+  font-size:10px !important;
+  line-height:1.0;
+}
+.spot .name-bottom.xlong{
+  font-size:9px !important;
+  line-height:.98;
+}
+.spot .name-bottom.xxlong{
+  font-size:8px !important;
+  line-height:.96;
+}
+.spot.done .name-top,
+.spot.done .name-bottom{
+  color:#163246 !important;
+}
+
+
+.spot .name-middle{
+  font-size:12px;
+  line-height:1.0;
+  font-weight:900;
+  color:#243f50;
+  margin-top:2px;
+  white-space:nowrap;
+}
+.spot .name-bottom.three-line{
+  font-size:9px !important;
+  line-height:.98;
+  margin-top:1px;
+}
+.spot.done .name-middle{
+  color:#163246 !important;
+}
+
 </style>
 </head>
 <body>
@@ -494,12 +646,9 @@ textarea { resize:vertical; }
     <div class="top">
       <div class="illust">🚶</div>
       <div class="title-block">
-        <h1>近畿スタンプカード</h1>
-        <div class="goal">
-          <label for="goalInput">目標：</label>
-          <input id="goalInput" type="text" placeholder="例：年内に近畿34制覇">
-        </div>
-      </div>
+        <button type="button" id="aboutBtn" class="btn about-top">このアプリについて</button>
+        <h1>イオンモールウォーキング制覇（近畿版）</h1>
+</div>
     </div>
 
     <section class="info-bar">
@@ -509,7 +658,8 @@ textarea { resize:vertical; }
       <div class="info-box"><strong id="totalLaps">0</strong><span>周</span></div>
     </section>
 
-    <section class="extras-row">
+    <div id="nextGoal" class="progress-next">次の目標を計算中…</div>
+<section class="extras-row">
       <div class="complete-box">
         <strong>府県コンプリート</strong>
         <div id="prefComplete" class="pref-list"></div>
@@ -535,29 +685,18 @@ textarea { resize:vertical; }
       <button class="btn" data-filter="main">メイン34</button>
       <button class="btn" data-filter="extra">EXTRA 5</button>
       <button id="demoBtn" class="btn">デモモード OFF</button>
-      <button id="exportBtn" class="btn">CSV出力</button>
+      <button id="exportBtn" class="btn">バックアップCSV</button>
       <button id="importBtn" class="btn">CSV読込</button>
+      <button id="albumBtn" class="btn">攻略アルバム</button>
+      <button id="zipBackupBtn" class="btn">ZIPバックアップ</button>
+      <button id="zipRestoreBtn" class="btn">ZIP復元</button>
+      <button id="clearAllBtn" class="btn danger">スタンプ全クリア</button>
       <input id="csvInput" type="file" accept=".csv,text/csv" class="hidden">
+      <input id="zipInput" type="file" accept=".zip,application/zip" class="hidden">
     </div>
-
-    <section class="note">
-      <strong>使い方</strong><br>
-      丸いスタンプ枠をタップすると、そのモールの詳細データが開きます。スタンプ色は難易度で分かれています。C=紫、B=黄、A=青、S=赤。
-    </section>
-
-    <section class="card-frame">
-      <div class="frame-head">
-        <strong>目標が達成できたらスタンプがもらえるよ♪</strong>
-        <span>5 × 8 のスタンプカード（39施設＋予備1）</span>
-      </div>
-      <div id="stampGrid" class="grid"></div>
-      <div class="legend">
-        <span><i class="c"></i>C（紫）</span>
-        <span><i class="b"></i>B（黄）</span>
-        <span><i class="a"></i>A（青）</span>
-        <span><i class="s"></i>S（赤）</span>
-      </div>
-    </section>
+<section class="card-frame">
+<div id="stampGrid" class="grid"></div>
+</section>
   </section>
 </main>
 
@@ -629,6 +768,12 @@ textarea { resize:vertical; }
       </label>
     </div>
 
+    <div class="box" style="margin-top:6px">
+      <strong style="font-size:11px">コース案内板写真（1枚）</strong>
+      <div class="photo-tools"><img id="photoPreview" class="photo-preview" alt="コース案内板写真"><button type="button" id="photoBtn" class="btn">写真を登録</button><button type="button" id="photoDeleteBtn" class="btn">写真削除</button><input id="photoInput" type="file" accept="image/*" capture="environment" class="hidden"></div>
+      <p class="smallnote">START/GOALや距離が分かるモールウォーキング案内板を撮るのがおすすめです。</p>
+    </div>
+
     <div class="footer-actions">
       <button type="button" id="saveBtn" class="btn primary">📍 現在地を確認してスタンプ</button>
       <button type="button" id="deleteBtn" class="btn">この記録を削除</button>
@@ -648,11 +793,64 @@ textarea { resize:vertical; }
   </form>
 </dialog>
 
+
+<dialog id="albumDialog"><form method="dialog" class="modal"><button class="close" value="cancel">×</button><p class="smallnote">KINKI COMPLETE ALBUM</p><h2>攻略アルバム</h2><div id="albumGrid" class="album-grid"></div></form></dialog>
+<dialog id="csvModeDialog"><form method="dialog" class="modal"><button class="close" value="cancel">×</button><h2>CSVの読み込み方法</h2><div class="choice-row"><button type="button" id="csvMergeBtn" class="btn primary">追加・更新</button><button type="button" id="csvReplaceBtn" class="btn danger">全置き換え（復元）</button></div><p class="smallnote">全置き換えは現在の記録をCSVの内容に置き換えます。</p></form></dialog>
+
+
+<dialog id="aboutDialog">
+  <form method="dialog" class="modal">
+    <button class="close" value="cancel" aria-label="閉じる">×</button>
+    <p class="smallnote">ABOUT THIS APP</p>
+    <h2>このアプリについて</h2>
+    <div class="about-sections">
+      <section class="about-section">
+        <h3>基本ルール</h3>
+        <ul>
+          <li>各イオンモールで60分以上ウォーキングする。</li>
+          <li>終了時に「現在地を確認してスタンプ」を押す。</li>
+          <li>周回数・距離・歩数・メモなどを記録できる。</li>
+        </ul>
+      </section>
+      <section class="about-section">
+        <h3>スタンプ</h3>
+        <ul>
+          <li>難易度ごとに C=紫、B=黄、A=青、S=赤。</li>
+          <li>通常・キラキラ・金縁・特大・レアの演出が出ることがある。</li>
+          <li>府県コンプリート、MY BEST、シークレット実績を楽しめる。</li>
+        </ul>
+      </section>
+      <section class="about-section">
+        <h3>写真</h3>
+        <p>各モールにつき1枚、START/GOALや距離が分かる「コース案内板写真」を登録できる。攻略アルバムから一覧表示できる。</p>
+      </section>
+      <section class="about-section">
+        <h3>バックアップ</h3>
+        <ul>
+          <li>バックアップCSV：記録を日付入りCSVで保存。</li>
+          <li>CSV読込：追加・更新、または全置き換え（復元）。</li>
+          <li>ZIPバックアップ：CSV＋写真をまとめて保存。</li>
+          <li>ZIP復元：記録と写真をまとめて復元。</li>
+        </ul>
+      </section>
+      <section class="about-section">
+        <h3>その他</h3>
+        <ul>
+          <li>「あと○○」で次の目標を表示。</li>
+          <li>「スタンプ全クリア」で攻略記録のみ初期化。</li>
+          <li>位置情報は自動取得せず、ボタンを押した時だけ使用。</li>
+        </ul>
+      </section>
+    </div>
+  </form>
+</dialog>
+
 <script>
 const MALLS = [{"id": "kuwana", "name": "イオンモール桑名", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0722, "lng": 136.6829, "x": 871.0444180105953, "y": 104.99316395559767, "ox": 860.2, "oy": 111.2}, {"id": "toin", "name": "イオンモール東員", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0618, "lng": 136.5921, "x": 814.2756528249954, "y": 115.91615802982051, "ox": 826.9, "oy": 118.0}, {"id": "kitaoji", "name": "イオンモール北大路", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 35.0449, "lng": 135.7587, "x": 534.5608705626087, "y": 116.22683217677556, "ox": 520.7, "oy": 129.2}, {"id": "yokkaichi-kita", "name": "イオンモール四日市北", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0078, "lng": 136.6567, "x": 852.3799291644092, "y": 161.99067801458176, "ox": 850.6, "oy": 153.7}, {"id": "kusatsu", "name": "イオンモール草津", "pref": "滋賀", "stage": "main", "difficulty": "B", "lat": 34.9979, "lng": 135.9153, "x": 587.511997485175, "y": 156.98828777492187, "ox": 578.3, "oy": 160.2}, {"id": "kyoto-gojo", "name": "イオンモール京都五条", "pref": "京都", "stage": "main", "difficulty": "A", "lat": 34.9975, "lng": 135.7277, "x": 486.86021102128416, "y": 143.739327014674, "ox": 509.4, "oy": 160.5}, {"id": "kyoto", "name": "イオンモールKYOTO", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9835, "lng": 135.7548, "x": 532.998327445423, "y": 175.99417925371674, "ox": 519.3, "oy": 169.7}, {"id": "kyoto-katsuragawa", "name": "イオンモール京都桂川", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.9645, "lng": 135.7082, "x": 480.9591697779302, "y": 197.84565020503058, "ox": 502.2, "oy": 182.3}, {"id": "kasai-hojo", "name": "イオンモール加西北条", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.9298, "lng": 134.841, "x": 183.6, "y": 205.2, "ox": 183.6, "oy": 205.2}, {"id": "inagawa", "name": "イオンモール猪名川", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.904, "lng": 135.363, "x": 374.7738036897703, "y": 221.43137551760375, "ox": 375.4, "oy": 222.2}, {"id": "kumiyama", "name": "イオンモール久御山", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9008, "lng": 135.7501, "x": 524.609423707579, "y": 235.4057235748812, "ox": 517.6, "oy": 224.3}, {"id": "suzuka", "name": "イオンモール鈴鹿", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.871, "lng": 136.531, "x": 804.4, "y": 244.0, "ox": 804.4, "oy": 244.0}, {"id": "kobe-kita", "name": "イオンモール神戸北", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.8596, "lng": 135.192, "x": 309.2516176336163, "y": 249.22644828125308, "ox": 312.6, "oy": 251.5}, {"id": "ibaraki", "name": "イオンモール茨木", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.8098, "lng": 135.5589, "x": 466.3961302499756, "y": 265.2834813376406, "ox": 447.4, "oy": 284.4}, {"id": "himeji-otsu", "name": "イオンモール姫路大津", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.8088, "lng": 134.6065, "x": 82.22906364174426, "y": 281.14831032834627, "ox": 97.5, "oy": 285.1}, {"id": "himeji-rivercity", "name": "イオンモール姫路リバーシティー", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7998, "lng": 134.6687, "x": 135.5709363582557, "y": 294.95168967165375, "ox": 120.3, "oy": 291.0}, {"id": "itami-koya", "name": "イオンモール伊丹昆陽", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7875, "lng": 135.3878, "x": 359.0813796836775, "y": 283.0574373657957, "ox": 384.5, "oy": 299.1}, {"id": "itami", "name": "イオンモール伊丹", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.7805, "lng": 135.4212, "x": 389.2654434288557, "y": 323.1933098200357, "ox": 396.8, "oy": 303.7}, {"id": "dainichi", "name": "イオンモール大日", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.7484, "lng": 135.5808, "x": 442.8064909750833, "y": 318.54457255764174, "ox": 455.4, "oy": 324.9}, {"id": "shijonawate", "name": "イオンモール四條畷", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.741, "lng": 135.639, "x": 493.55488024900706, "y": 315.5690825301963, "ox": 476.8, "oy": 329.8}, {"id": "naratomigaoka", "name": "イオンモール奈良登美ヶ丘", "pref": "奈良", "stage": "main", "difficulty": "C", "lat": 34.7265, "lng": 135.7524, "x": 515.6664624579115, "y": 362.1085608549797, "ox": 518.4, "oy": 339.4}, {"id": "takanohara", "name": "イオンモール高の原", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.7227, "lng": 135.7895, "x": 552.8991549332081, "y": 326.2501570190203, "ox": 532.1, "oy": 341.9}, {"id": "tsurumiryokuchi", "name": "イオンモール鶴見緑地", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.7042, "lng": 135.5661, "x": 459.25740617897105, "y": 367.1085870329015, "ox": 450.0, "oy": 354.1}, {"id": "tsuminami", "name": "イオンモール津南", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.6702, "lng": 136.5178, "x": 799.6, "y": 376.6, "ox": 799.6, "oy": 376.6}, {"id": "osaka-dome", "name": "イオンモール大阪ドームシティ", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.6692, "lng": 135.478, "x": 403.4554975223524, "y": 379.21706438583584, "ox": 417.6, "oy": 377.2}, {"id": "kobe-minami", "name": "イオンモール神戸南", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.6626, "lng": 135.1747, "x": 300.5188857533891, "y": 396.60936356512013, "ox": 306.2, "oy": 381.6}, {"id": "yamatokoriyama", "name": "イオンモール大和郡山", "pref": "奈良", "stage": "main", "difficulty": "B", "lat": 34.6418, "lng": 135.7976, "x": 543.2636090664047, "y": 409.4765171731406, "ox": 535.0, "oy": 395.3}, {"id": "sakaiteppocho", "name": "イオンモール堺鉄砲町", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.5927, "lng": 135.4819, "x": 394.3896707759679, "y": 439.2112399085922, "ox": 419.1, "oy": 427.7}, {"id": "sakaikitahanada", "name": "イオンモール堺北花田", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.5836, "lng": 135.5161, "x": 442.2767870492829, "y": 422.3979777531613, "ox": 431.6, "oy": 433.7}, {"id": "meiwa", "name": "イオンモール明和", "pref": "三重", "stage": "main", "difficulty": "S", "lat": 34.5538, "lng": 136.6083, "x": 832.8, "y": 453.4, "ox": 832.8, "oy": 453.4}, {"id": "kashihara", "name": "イオンモール橿原", "pref": "奈良", "stage": "main", "difficulty": "A", "lat": 34.5097, "lng": 135.7922, "x": 533.8805371158813, "y": 482.80708060060226, "ox": 533.1, "oy": 482.5}, {"id": "hineno", "name": "イオンモール日根野", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.39, "lng": 135.3303, "x": 377.9190786705441, "y": 554.8290835046025, "ox": 363.4, "oy": 561.6}, {"id": "rinkusennan", "name": "イオンモールりんくう泉南", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.3753, "lng": 135.2737, "x": 328.0809213294559, "y": 578.0709164953975, "ox": 342.6, "oy": 571.3}, {"id": "wakayama", "name": "イオンモール和歌山", "pref": "和歌山", "stage": "main", "difficulty": "C", "lat": 34.2762, "lng": 135.148, "x": 296.4, "y": 636.7, "ox": 296.4, "oy": 636.7}, {"id": "senrito", "name": "イオンSENRITO専門館", "pref": "大阪", "stage": "extra", "difficulty": "C", "lat": 34.8091, "lng": 135.4957, "x": 413.6599926883455, "y": 269.1628332722796, "ox": 424.1, "oy": 284.9}, {"id": "fujiidera", "name": "イオン藤井寺ショッピングセンター", "pref": "大阪", "stage": "extra", "difficulty": "B", "lat": 34.5711, "lng": 135.5947, "x": 476.5211363016897, "y": 460.2542745893196, "ox": 460.5, "oy": 442.0}, {"id": "akashi-sc", "name": "イオン明石ショッピングセンター", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6817, "lng": 134.9382, "x": 193.94615384615392, "y": 369.0, "ox": 219.3, "oy": 369.0}, {"id": "akashi-vivre", "name": "明石ビブレ", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6816, "lng": 134.9387, "x": 244.8538461538461, "y": 369.0, "ox": 219.5, "oy": 369.0}, {"id": "sannomiya-opa2", "name": "三宮オーパ2", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.695, "lng": 135.1967, "x": 319.9811142466109, "y": 345.1906364348799, "ox": 314.3, "oy": 360.2}];
 const STORAGE_KEY = "aeon_stamp_card_v6";
-const GOAL_KEY = "aeon_stamp_card_goal_v6";
 const SECRET_KEY = "aeon_secret_set_v11";
+const PHOTO_DB = "aeon_mall_photo_db_v14";
+const PHOTO_STORE = "photos";
 let records = (() => { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; } })();
 let current = null;
 let currentFilter = "all";
@@ -666,6 +864,21 @@ let endOK = false;
 let locationFallbackUsed = false;
 
 const $ = s => document.querySelector(s);
+
+let pendingCsvText=null;
+function openPhotoDB(){return new Promise((resolve,reject)=>{const q=indexedDB.open(PHOTO_DB,1);q.onupgradeneeded=()=>{const db=q.result;if(!db.objectStoreNames.contains(PHOTO_STORE))db.createObjectStore(PHOTO_STORE)};q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
+async function putPhoto(id,blob){const db=await openPhotoDB();return new Promise((resolve,reject)=>{const tx=db.transaction(PHOTO_STORE,"readwrite");tx.objectStore(PHOTO_STORE).put(blob,id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+async function getPhoto(id){const db=await openPhotoDB();return new Promise((resolve,reject)=>{const tx=db.transaction(PHOTO_STORE,"readonly");const q=tx.objectStore(PHOTO_STORE).get(id);q.onsuccess=()=>resolve(q.result||null);q.onerror=()=>reject(q.error)})}
+async function deletePhoto(id){const db=await openPhotoDB();return new Promise((resolve,reject)=>{const tx=db.transaction(PHOTO_STORE,"readwrite");tx.objectStore(PHOTO_STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+async function clearPhotos(){const db=await openPhotoDB();return new Promise((resolve,reject)=>{const tx=db.transaction(PHOTO_STORE,"readwrite");tx.objectStore(PHOTO_STORE).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+async function allPhotos(){const db=await openPhotoDB();return new Promise((resolve,reject)=>{const tx=db.transaction(PHOTO_STORE,"readonly"),st=tx.objectStore(PHOTO_STORE),q=st.getAllKeys();q.onsuccess=()=>{const keys=q.result,a=[];let n=keys.length;if(!n){resolve(a);return}keys.forEach(k=>{const r=st.get(k);r.onsuccess=()=>{a.push([k,r.result]);if(--n===0)resolve(a)}})};q.onerror=()=>reject(q.error)})}
+async function resizePhoto(file){const img=await createImageBitmap(file),mx=1200,s=Math.min(1,mx/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s),c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);return await new Promise(res=>c.toBlob(res,"image/jpeg",.82))}
+function crc32(bytes){let t=crc32.t;if(!t){t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0}crc32.t=t}let c=0xffffffff;for(const b of bytes)c=t[(c^b)&255]^(c>>>8);return(c^0xffffffff)>>>0}
+const U16=n=>[n&255,(n>>>8)&255],U32=n=>[n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255];
+async function makeZip(entries){const enc=new TextEncoder(),ls=[],cs=[];let off=0;for(const e of entries){const name=enc.encode(e.name),data=e.data instanceof Uint8Array?e.data:new Uint8Array(e.data),crc=crc32(data);const l=new Uint8Array([...U32(0x04034b50),...U16(20),...U16(0),...U16(0),...U16(0),...U16(0),...U32(crc),...U32(data.length),...U32(data.length),...U16(name.length),...U16(0),...name,...data]);ls.push(l);const c=new Uint8Array([...U32(0x02014b50),...U16(20),...U16(20),...U16(0),...U16(0),...U16(0),...U16(0),...U32(crc),...U32(data.length),...U32(data.length),...U16(name.length),...U16(0),...U16(0),...U16(0),...U16(0),...U32(0),...U32(off),...name]);cs.push(c);off+=l.length}const csize=cs.reduce((s,a)=>s+a.length,0),end=new Uint8Array([...U32(0x06054b50),...U16(0),...U16(0),...U16(entries.length),...U16(entries.length),...U32(csize),...U32(off),...U16(0)]);return new Blob([...ls,...cs,end],{type:"application/zip"})}
+const R16=(v,o)=>v[o]|(v[o+1]<<8),R32=(v,o)=>(v[o]|v[o+1]<<8|v[o+2]<<16|v[o+3]<<24)>>>0;
+async function readStoreZip(file){const v=new Uint8Array(await file.arrayBuffer()),dec=new TextDecoder(),out={};let o=0;while(o+30<=v.length&&R32(v,o)===0x04034b50){const method=R16(v,o+8),size=R32(v,o+18),nl=R16(v,o+26),xl=R16(v,o+28);if(method!==0)throw new Error("unsupported compression");const name=dec.decode(v.slice(o+30,o+30+nl)),st=o+30+nl+xl;out[name]=v.slice(st,st+size);o=st+size}return out}
+
 
 const SECRET_POOL = [
   {id:"double_day", title:"一日二城", desc:"同じ日に2つ以上のモールを攻略する", test:()=>sameDayCount()>=2},
@@ -733,6 +946,10 @@ function filteredMalls() {
               .filter(m => (m.name + m.pref).toLowerCase().includes(q));
 }
 
+
+function updateNextGoal(){const mains=MALLS.filter(m=>m.stage==="main"),remain=mains.filter(m=>!rec(m.id).cleared).length;if(!remain){$("#nextGoal").textContent="近畿メイン34 COMPLETE！";return}const c=[];[...new Set(mains.map(m=>m.pref))].forEach(p=>{const a=mains.filter(m=>m.pref===p),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${p}制覇まであと${r}`})});["C","B","A","S"].forEach(d=>{const a=mains.filter(m=>m.difficulty===d),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${d}ランク制覇まであと${r}`})});c.push({n:remain,t:`近畿制覇まであと${remain}`});c.sort((a,b)=>a.n-b.n);$("#nextGoal").textContent=c[0].t}
+function randomStampType(){const r=Math.random();return r<.03?"rare":r<.08?"big":r<.16?"gold":r<.28?"sparkle":"normal"}
+
 function renderStats() {
   const mains = MALLS.filter(m => m.stage === "main");
   const extras = MALLS.filter(m => m.stage === "extra");
@@ -782,19 +999,43 @@ function makeSpot(mall) {
       ? MALLS.filter(x => x.stage === "main").indexOf(mall) + 1
       : "E" + (MALLS.filter(x => x.stage === "extra").indexOf(mall) + 1);
 
-  btn.className = "spot " + mall.stage + " diff-" + mall.difficulty + (r.cleared ? " done" : "");
+  let stampClass=""; if(r.cleared&&r.stampType&&r.stampType!=="normal") stampClass=" stamp-"+r.stampType;
+  btn.className = "spot " + mall.stage + " diff-" + mall.difficulty + (r.cleared ? " done" : "") + stampClass;
   btn.dataset.id = mall.id;
-  btn.innerHTML = `
-    <span class="num">${label}</span>
-    ${topBottom[0] ? `<span class="name-top">${topBottom[0]}</span>` : ``}
-    <span class="name-bottom">${topBottom[1]}</span>
-  `;
+  const specialThreeLine = {
+    "E1": ["イオン", "SENRITO", "専門館"],
+    "E2": ["イオン", "藤井寺", "ショッピングセンター"],
+    "E3": ["イオン", "明石", "ショッピングセンター"]
+  };
+
+  if (specialThreeLine[label]) {
+    const parts = specialThreeLine[label];
+    btn.innerHTML = `
+      <span class="num">${label}</span>
+      <span class="name-top">${parts[0]}</span>
+      <span class="name-middle">${parts[1]}</span>
+      <span class="name-bottom three-line">${parts[2]}</span>
+    `;
+  } else {
+    const n = topBottom[1] || "";
+    let lenClass = "";
+    if (n.length >= 12) lenClass = " xxlong";
+    else if (n.length >= 9) lenClass = " xlong";
+    else if (n.length >= 7) lenClass = " long";
+
+    btn.innerHTML = `
+      <span class="num">${label}</span>
+      ${topBottom[0] ? `<span class="name-top">${topBottom[0]}</span>` : ``}
+      <span class="name-bottom${lenClass}">${n}</span>
+    `;
+  }
   btn.addEventListener("click", () => openDetail(mall));
   return btn;
 }
 
 function renderGrid() {
   const grid = $("#stampGrid");
+  if (!grid) return;
   grid.innerHTML = "";
   const items = filteredMalls();
   items.forEach(mall => grid.appendChild(makeSpot(mall)));
@@ -810,6 +1051,7 @@ function renderGrid() {
 function render() {
   renderStats();
   renderGrid();
+  updateNextGoal();
 }
 
 function resetWalkState() {
@@ -843,6 +1085,7 @@ function openDetail(mall) {
   $("#lapDistanceInput").value = r.lapDistance || "";
   $("#lapStepsInput").value = r.lapSteps || "";
   $("#memoInput").value = r.memo || "";
+  $("#photoPreview").removeAttribute("src"); getPhoto(mall.id).then(b=>{if(b)$("#photoPreview").src=URL.createObjectURL(b)}).catch(()=>{});
   $("#detailDialog").showModal();
 }
 
@@ -1033,7 +1276,8 @@ function finalizeStamp(locationMethod){
     lapDistance: Number($("#lapDistanceInput").value || 0),
     lapSteps: Number($("#lapStepsInput").value || 0),
     memo: $("#memoInput").value.trim(),
-    locationCheck: locationMethod
+    locationCheck: locationMethod,
+    stampType: rec(current.id).stampType || randomStampType()
   };
   const stampedId = current.id;
   saveAll();
@@ -1123,100 +1367,24 @@ document.querySelectorAll("[data-filter]").forEach(btn => {
 
 $("#search").addEventListener("input", renderGrid);
 
-$("#demoBtn").addEventListener("click", () => {
+$("#demoBtn")?.addEventListener("click", () => {
   demoMode = !demoMode;
   $("#demoBtn").textContent = "デモモード " + (demoMode ? "ON" : "OFF");
   $("#demoBtn").classList.toggle("active", demoMode);
 });
 
 /* CSV */
-function csvEscape(v) {
-  const s = String(v ?? "");
-  if (/[",\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
-  return s;
-}
+function csvEscape(v){const s=String(v??"");return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+const CSV_HEADERS=["id","name","pref","stage","difficulty","cleared","date","minutes","laps","distance","steps","lapDistance","lapSteps","memo","locationCheck","stampType"];
+function buildCsv(){const rows=[CSV_HEADERS.join(",")];MALLS.forEach(m=>{const r=rec(m.id);rows.push([m.id,m.name,m.pref,m.stage,m.difficulty,!!r.cleared,r.date||"",r.minutes||"",r.laps||"",r.distance||"",r.steps||"",r.lapDistance||"",r.lapSteps||"",r.memo||"",r.locationCheck||"",r.stampType||""].map(csvEscape).join(","))});return "\ufeff"+rows.join("\n")}
+$("#exportBtn")?.addEventListener("click",()=>{const b=new Blob([buildCsv()],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`aeon_mall_walking_backup_${today()}.csv`;a.click();URL.revokeObjectURL(a.href)});
+function parseCSV(text){const rows=[];let row=[],cell="",q=false;for(let i=0;i<text.length;i++){const ch=text[i];if(q){if(ch==='"'){if(text[i+1]==='"'){cell+='"';i++}else q=false}else cell+=ch}else{if(ch==='"')q=true;else if(ch===","){row.push(cell);cell=""}else if(ch==="\n"){row.push(cell);rows.push(row);row=[];cell=""}else if(ch!=="\r")cell+=ch}}row.push(cell);rows.push(row);return rows.filter(r=>r.length&&!(r.length===1&&r[0]===""))}
+function parseCsvRecords(text){const rows=parseCSV(text.replace(/^\ufeff/,""));if(rows.length<2)return{};const h=rows[0],idx=Object.fromEntries(h.map((x,i)=>[x,i])),next={};for(const row of rows.slice(1)){const id=row[idx.id];if(!id)continue;next[id]={cleared:row[idx.cleared]==="true"||row[idx.cleared]==="TRUE",date:row[idx.date]||"",minutes:Number(row[idx.minutes]||0),laps:Number(row[idx.laps]||0),distance:Number(row[idx.distance]||0),steps:Number(row[idx.steps]||0),lapDistance:Number(row[idx.lapDistance]||0),lapSteps:Number(row[idx.lapSteps]||0),memo:row[idx.memo]||"",locationCheck:idx.locationCheck!==undefined?(row[idx.locationCheck]||""):"",stampType:idx.stampType!==undefined?(row[idx.stampType]||""):""}}return next}
+$("#importBtn")?.addEventListener("click",()=>$("#csvInput").click());
+$("#csvInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;pendingCsvText=await f.text();$("#csvModeDialog").showModal();e.target.value=""});
+$("#csvMergeBtn").addEventListener("click",()=>{records={...records,...parseCsvRecords(pendingCsvText||"")};saveAll();$("#csvModeDialog").close();alert("CSVを追加・更新しました。")});
+$("#csvReplaceBtn").addEventListener("click",()=>{if(!confirm("現在の記録はCSVの内容に置き換わります。よろしいですか？"))return;records=parseCsvRecords(pendingCsvText||"");saveAll();$("#csvModeDialog").close();alert("CSVから復元しました。")});
 
-$("#exportBtn").addEventListener("click", () => {
-  const headers = ["id","name","pref","stage","difficulty","cleared","date","minutes","laps","distance","steps","lapDistance","lapSteps","memo","locationCheck"];
-  const rows = [headers.join(",")];
-  MALLS.forEach(m => {
-    const r = rec(m.id);
-    rows.push([
-      m.id, m.name, m.pref, m.stage, m.difficulty,
-      !!r.cleared, r.date || "", r.minutes || "", r.laps || "", r.distance || "",
-      r.steps || "", r.lapDistance || "", r.lapSteps || "", r.memo || "", r.locationCheck || ""
-    ].map(csvEscape).join(","));
-  });
-  const blob = new Blob(["\ufeff" + rows.join("\n")], {type:"text/csv;charset=utf-8;"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "aeon_mall_walking_records.csv";
-  a.click();
-  URL.revokeObjectURL(a.href);
-});
-
-function parseCSV(text) {
-  const rows = [];
-  let row = [], cell = "", q = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (q) {
-      if (ch === '"') {
-        if (text[i+1] === '"') { cell += '"'; i++; }
-        else q = false;
-      } else {
-        cell += ch;
-      }
-    } else {
-      if (ch === '"') q = true;
-      else if (ch === ",") { row.push(cell); cell = ""; }
-      else if (ch === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
-      else if (ch === "\r") { }
-      else { cell += ch; }
-    }
-  }
-  row.push(cell);
-  rows.push(row);
-  return rows.filter(r => r.length && !(r.length===1 && r[0]===""));
-}
-
-$("#importBtn").addEventListener("click", () => $("#csvInput").click());
-$("#csvInput").addEventListener("change", async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const text = await file.text();
-  const rows = parseCSV(text);
-  if (rows.length < 2) {
-    alert("CSVにデータがありません。");
-    return;
-  }
-  const header = rows[0];
-  const idx = Object.fromEntries(header.map((h,i) => [h, i]));
-  const next = {};
-  for (const row of rows.slice(1)) {
-    const id = row[idx.id];
-    if (!id) continue;
-    next[id] = {
-      cleared: row[idx.cleared] === "true" || row[idx.cleared] === "TRUE",
-      date: row[idx.date] || "",
-      minutes: Number(row[idx.minutes] || 0),
-      laps: Number(row[idx.laps] || 0),
-      distance: Number(row[idx.distance] || 0),
-      steps: Number(row[idx.steps] || 0),
-      lapDistance: Number(row[idx.lapDistance] || 0),
-      lapSteps: Number(row[idx.lapSteps] || 0),
-      memo: row[idx.memo] || "",
-      locationCheck: idx.locationCheck !== undefined ? (row[idx.locationCheck] || "") : ""
-    };
-  }
-  records = next;
-  saveAll();
-  alert("CSVを読み込みました。");
-  e.target.value = "";
-});
-
-$("#goalInput").value = localStorage.getItem(GOAL_KEY) || "";
-$("#goalInput").addEventListener("input", () => localStorage.setItem(GOAL_KEY, $("#goalInput").value));
 
 
 function renderSecrets(){
@@ -1233,7 +1401,7 @@ function renderSecrets(){
   });
 }
 
-$("#secretBtn").addEventListener("click", ()=>{
+$("#secretBtn")?.addEventListener("click", ()=>{
   try{
     renderSecrets();
     const dlg = $("#secretDialog");
@@ -1248,12 +1416,27 @@ $("#secretBtn").addEventListener("click", ()=>{
   }
 });
 
+
+$("#photoBtn").addEventListener("click",()=>$("#photoInput").click());
+$("#photoInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f||!current)return;const b=await resizePhoto(f);await putPhoto(current.id,b);$("#photoPreview").src=URL.createObjectURL(b);e.target.value=""});
+$("#photoDeleteBtn").addEventListener("click",async()=>{if(!current)return;await deletePhoto(current.id);$("#photoPreview").removeAttribute("src")});
+$("#albumBtn")?.addEventListener("click",async()=>{const g=$("#albumGrid");g.innerHTML="";for(const m of MALLS){const b=await getPhoto(m.id),c=document.createElement("div");c.className="album-card"+(b?"":" empty");const img=document.createElement("img");if(b)img.src=URL.createObjectURL(b);const cap=document.createElement("div");cap.className="cap";cap.textContent=m.name;c.append(img,cap);g.appendChild(c)}$("#albumDialog").showModal()});
+$("#clearAllBtn")?.addEventListener("click",()=>{if(!confirm("今まで押したスタンプをすべてクリアします。写真は残します。よろしいですか？"))return;records={};saveAll();alert("スタンプ記録をすべてクリアしました。")});
+$("#zipBackupBtn")?.addEventListener("click",async()=>{const enc=new TextEncoder(),entries=[{name:"records.csv",data:enc.encode(buildCsv())}];for(const [id,b] of await allPhotos())entries.push({name:`photos/${id}.jpg`,data:new Uint8Array(await b.arrayBuffer())});const z=await makeZip(entries),a=document.createElement("a");a.href=URL.createObjectURL(z);a.download=`aeon_mall_walking_full_backup_${today()}.zip`;a.click();URL.revokeObjectURL(a.href)});
+$("#zipRestoreBtn")?.addEventListener("click",()=>$("#zipInput").click());
+$("#zipInput").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;if(!confirm("ZIPバックアップから記録と写真を復元します。現在の記録と写真を置き換えます。よろしいですか？")){e.target.value="";return}try{const fs=await readStoreZip(f),dec=new TextDecoder();if(!fs["records.csv"])throw 0;records=parseCsvRecords(dec.decode(fs["records.csv"]));await clearPhotos();for(const [name,data] of Object.entries(fs))if(name.startsWith("photos/")&&name.endsWith(".jpg"))await putPhoto(name.slice(7,-4),new Blob([data],{type:"image/jpeg"}));saveAll();alert("ZIPバックアップから復元しました。")}catch(err){console.error(err);alert("ZIPバックアップを復元できませんでした。")};e.target.value=""});
+
+
+$("#aboutBtn")?.addEventListener("click",()=>{
+  $("#aboutDialog").showModal();
+});
+
 window.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredPrompt = e;
   $("#installBtn").classList.remove("hidden");
 });
-$("#installBtn").addEventListener("click", async () => {
+$("#installBtn")?.addEventListener("click", async () => {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
   deferredPrompt = null;
@@ -1264,7 +1447,20 @@ if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
   window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
 }
 
-render();
+
+/* V21 initial boot */
+window.addEventListener("DOMContentLoaded", () => {
+  try {
+    render();
+  } catch (err) {
+    console.error("initial render failed", err);
+    const g = document.querySelector("#stampGrid");
+    if (g) {
+      g.innerHTML = '<div style="padding:20px;color:#a33;font-weight:700">初期表示エラー：ページを再読み込みしてください。</div>';
+    }
+  }
+});
+
 </script>
 </body>
 </html>
