@@ -943,6 +943,7 @@ textarea { resize:vertical; }
     text-align:left;
   }
 }
+.info-bar { grid-template-columns:repeat(3,minmax(0,1fr)); }
 </style>
 </head>
 <body>
@@ -957,8 +958,7 @@ textarea { resize:vertical; }
     </div>
 
     <section class="info-bar">
-      <div class="info-box"><strong id="clearMain">0</strong><span>/34 CLEAR</span></div>
-      <div class="info-box"><strong id="clearExtra">0</strong><span>/5 EXTRA</span></div>
+      <div class="info-box"><strong id="clearMain">0</strong><span>/30 CLEAR</span></div>
       <div class="info-box"><strong id="totalDistance">0.0</strong><span>km</span></div>
       <div class="info-box"><strong id="totalLaps">0</strong><span>周</span></div>
     </section>
@@ -987,8 +987,6 @@ textarea { resize:vertical; }
     <div class="toolbar">
       <input id="search" class="search" type="search" placeholder="施設名・府県で検索">
       <button class="btn active" data-filter="all">全部</button>
-      <button class="btn" data-filter="main">メイン34</button>
-      <button class="btn" data-filter="extra">EXTRA 5</button>
       <button id="demoBtn" class="btn">デモモード OFF</button>
       <button id="exportBtn" class="btn">バックアップCSV</button>
       <button id="importBtn" class="btn">CSV読込</button>
@@ -1170,7 +1168,7 @@ textarea { resize:vertical; }
 </dialog>
 
 <script>
-const MALLS = [{"id": "kuwana", "name": "イオンモール桑名", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0722, "lng": 136.6829, "x": 871.0444180105953, "y": 104.99316395559767, "ox": 860.2, "oy": 111.2}, {"id": "toin", "name": "イオンモール東員", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0618, "lng": 136.5921, "x": 814.2756528249954, "y": 115.91615802982051, "ox": 826.9, "oy": 118.0}, {"id": "kitaoji", "name": "イオンモール北大路", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 35.0449, "lng": 135.7587, "x": 534.5608705626087, "y": 116.22683217677556, "ox": 520.7, "oy": 129.2}, {"id": "yokkaichi-kita", "name": "イオンモール四日市北", "pref": "三重", "stage": "main", "difficulty": "B", "lat": 35.0078, "lng": 136.6567, "x": 852.3799291644092, "y": 161.99067801458176, "ox": 850.6, "oy": 153.7}, {"id": "kusatsu", "name": "イオンモール草津", "pref": "滋賀", "stage": "main", "difficulty": "B", "lat": 34.9979, "lng": 135.9153, "x": 587.511997485175, "y": 156.98828777492187, "ox": 578.3, "oy": 160.2}, {"id": "kyoto-gojo", "name": "イオンモール京都五条", "pref": "京都", "stage": "main", "difficulty": "A", "lat": 34.9975, "lng": 135.7277, "x": 486.86021102128416, "y": 143.739327014674, "ox": 509.4, "oy": 160.5}, {"id": "kyoto", "name": "イオンモールKYOTO", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9835, "lng": 135.7548, "x": 532.998327445423, "y": 175.99417925371674, "ox": 519.3, "oy": 169.7}, {"id": "kyoto-katsuragawa", "name": "イオンモール京都桂川", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.9645, "lng": 135.7082, "x": 480.9591697779302, "y": 197.84565020503058, "ox": 502.2, "oy": 182.3}, {"id": "kasai-hojo", "name": "イオンモール加西北条", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.9298, "lng": 134.841, "x": 183.6, "y": 205.2, "ox": 183.6, "oy": 205.2}, {"id": "inagawa", "name": "イオンモール猪名川", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.904, "lng": 135.363, "x": 374.7738036897703, "y": 221.43137551760375, "ox": 375.4, "oy": 222.2}, {"id": "kumiyama", "name": "イオンモール久御山", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9008, "lng": 135.7501, "x": 524.609423707579, "y": 235.4057235748812, "ox": 517.6, "oy": 224.3}, {"id": "suzuka", "name": "イオンモール鈴鹿", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.871, "lng": 136.531, "x": 804.4, "y": 244.0, "ox": 804.4, "oy": 244.0}, {"id": "kobe-kita", "name": "イオンモール神戸北", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.8596, "lng": 135.192, "x": 309.2516176336163, "y": 249.22644828125308, "ox": 312.6, "oy": 251.5}, {"id": "ibaraki", "name": "イオンモール茨木", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.8098, "lng": 135.5589, "x": 466.3961302499756, "y": 265.2834813376406, "ox": 447.4, "oy": 284.4}, {"id": "himeji-otsu", "name": "イオンモール姫路大津", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.8088, "lng": 134.6065, "x": 82.22906364174426, "y": 281.14831032834627, "ox": 97.5, "oy": 285.1}, {"id": "himeji-rivercity", "name": "イオンモール姫路リバーシティー", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7998, "lng": 134.6687, "x": 135.5709363582557, "y": 294.95168967165375, "ox": 120.3, "oy": 291.0}, {"id": "itami-koya", "name": "イオンモール伊丹昆陽", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7875, "lng": 135.3878, "x": 359.0813796836775, "y": 283.0574373657957, "ox": 384.5, "oy": 299.1}, {"id": "itami", "name": "イオンモール伊丹", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.7805, "lng": 135.4212, "x": 389.2654434288557, "y": 323.1933098200357, "ox": 396.8, "oy": 303.7}, {"id": "dainichi", "name": "イオンモール大日", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.7484, "lng": 135.5808, "x": 442.8064909750833, "y": 318.54457255764174, "ox": 455.4, "oy": 324.9}, {"id": "shijonawate", "name": "イオンモール四條畷", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.741, "lng": 135.639, "x": 493.55488024900706, "y": 315.5690825301963, "ox": 476.8, "oy": 329.8}, {"id": "naratomigaoka", "name": "イオンモール奈良登美ヶ丘", "pref": "奈良", "stage": "main", "difficulty": "C", "lat": 34.7265, "lng": 135.7524, "x": 515.6664624579115, "y": 362.1085608549797, "ox": 518.4, "oy": 339.4}, {"id": "takanohara", "name": "イオンモール高の原", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.7227, "lng": 135.7895, "x": 552.8991549332081, "y": 326.2501570190203, "ox": 532.1, "oy": 341.9}, {"id": "tsurumiryokuchi", "name": "イオンモール鶴見緑地", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.7042, "lng": 135.5661, "x": 459.25740617897105, "y": 367.1085870329015, "ox": 450.0, "oy": 354.1}, {"id": "tsuminami", "name": "イオンモール津南", "pref": "三重", "stage": "main", "difficulty": "A", "lat": 34.6702, "lng": 136.5178, "x": 799.6, "y": 376.6, "ox": 799.6, "oy": 376.6}, {"id": "osaka-dome", "name": "イオンモール大阪ドームシティ", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.6692, "lng": 135.478, "x": 403.4554975223524, "y": 379.21706438583584, "ox": 417.6, "oy": 377.2}, {"id": "kobe-minami", "name": "イオンモール神戸南", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.6626, "lng": 135.1747, "x": 300.5188857533891, "y": 396.60936356512013, "ox": 306.2, "oy": 381.6}, {"id": "yamatokoriyama", "name": "イオンモール大和郡山", "pref": "奈良", "stage": "main", "difficulty": "B", "lat": 34.6418, "lng": 135.7976, "x": 543.2636090664047, "y": 409.4765171731406, "ox": 535.0, "oy": 395.3}, {"id": "sakaiteppocho", "name": "イオンモール堺鉄砲町", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.5927, "lng": 135.4819, "x": 394.3896707759679, "y": 439.2112399085922, "ox": 419.1, "oy": 427.7}, {"id": "sakaikitahanada", "name": "イオンモール堺北花田", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.5836, "lng": 135.5161, "x": 442.2767870492829, "y": 422.3979777531613, "ox": 431.6, "oy": 433.7}, {"id": "meiwa", "name": "イオンモール明和", "pref": "三重", "stage": "main", "difficulty": "S", "lat": 34.5538, "lng": 136.6083, "x": 832.8, "y": 453.4, "ox": 832.8, "oy": 453.4}, {"id": "kashihara", "name": "イオンモール橿原", "pref": "奈良", "stage": "main", "difficulty": "A", "lat": 34.5097, "lng": 135.7922, "x": 533.8805371158813, "y": 482.80708060060226, "ox": 533.1, "oy": 482.5}, {"id": "hineno", "name": "イオンモール日根野", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.39, "lng": 135.3303, "x": 377.9190786705441, "y": 554.8290835046025, "ox": 363.4, "oy": 561.6}, {"id": "rinkusennan", "name": "イオンモールりんくう泉南", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.3753, "lng": 135.2737, "x": 328.0809213294559, "y": 578.0709164953975, "ox": 342.6, "oy": 571.3}, {"id": "wakayama", "name": "イオンモール和歌山", "pref": "和歌山", "stage": "main", "difficulty": "C", "lat": 34.2762, "lng": 135.148, "x": 296.4, "y": 636.7, "ox": 296.4, "oy": 636.7}, {"id": "senrito", "name": "イオンSENRITO専門館", "pref": "大阪", "stage": "extra", "difficulty": "C", "lat": 34.8091, "lng": 135.4957, "x": 413.6599926883455, "y": 269.1628332722796, "ox": 424.1, "oy": 284.9}, {"id": "fujiidera", "name": "イオン藤井寺ショッピングセンター", "pref": "大阪", "stage": "extra", "difficulty": "B", "lat": 34.5711, "lng": 135.5947, "x": 476.5211363016897, "y": 460.2542745893196, "ox": 460.5, "oy": 442.0}, {"id": "akashi-sc", "name": "イオン明石ショッピングセンター", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6817, "lng": 134.9382, "x": 193.94615384615392, "y": 369.0, "ox": 219.3, "oy": 369.0}, {"id": "akashi-vivre", "name": "明石ビブレ", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.6816, "lng": 134.9387, "x": 244.8538461538461, "y": 369.0, "ox": 219.5, "oy": 369.0}, {"id": "sannomiya-opa2", "name": "三宮オーパ2", "pref": "兵庫", "stage": "extra", "difficulty": "C", "lat": 34.695, "lng": 135.1967, "x": 319.9811142466109, "y": 345.1906364348799, "ox": 314.3, "oy": 360.2}];
+const MALLS = [{"id": "kitaoji", "name": "イオンモール北大路", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 35.0449, "lng": 135.7587, "x": 534.5608705626087, "y": 116.22683217677556, "ox": 520.7, "oy": 129.2}, {"id": "kusatsu", "name": "イオンモール草津", "pref": "滋賀", "stage": "main", "difficulty": "B", "lat": 34.9979, "lng": 135.9153, "x": 587.511997485175, "y": 156.98828777492187, "ox": 578.3, "oy": 160.2}, {"id": "kyoto-gojo", "name": "イオンモール京都五条", "pref": "京都", "stage": "main", "difficulty": "A", "lat": 34.9975, "lng": 135.7277, "x": 486.86021102128416, "y": 143.739327014674, "ox": 509.4, "oy": 160.5}, {"id": "kyoto", "name": "イオンモールKYOTO", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9835, "lng": 135.7548, "x": 532.998327445423, "y": 175.99417925371674, "ox": 519.3, "oy": 169.7}, {"id": "kyoto-katsuragawa", "name": "イオンモール京都桂川", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.9645, "lng": 135.7082, "x": 480.9591697779302, "y": 197.84565020503058, "ox": 502.2, "oy": 182.3}, {"id": "kasai-hojo", "name": "イオンモール加西北条", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.9298, "lng": 134.841, "x": 183.6, "y": 205.2, "ox": 183.6, "oy": 205.2}, {"id": "inagawa", "name": "イオンモール猪名川", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.904, "lng": 135.363, "x": 374.7738036897703, "y": 221.43137551760375, "ox": 375.4, "oy": 222.2}, {"id": "kumiyama", "name": "イオンモール久御山", "pref": "京都", "stage": "main", "difficulty": "B", "lat": 34.9008, "lng": 135.7501, "x": 524.609423707579, "y": 235.4057235748812, "ox": 517.6, "oy": 224.3}, {"id": "kobe-kita", "name": "イオンモール神戸北", "pref": "兵庫", "stage": "main", "difficulty": "B", "lat": 34.8596, "lng": 135.192, "x": 309.2516176336163, "y": 249.22644828125308, "ox": 312.6, "oy": 251.5}, {"id": "ibaraki", "name": "イオンモール茨木", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.8098, "lng": 135.5589, "x": 466.3961302499756, "y": 265.2834813376406, "ox": 447.4, "oy": 284.4}, {"id": "senrito", "name": "イオンSENRITO専門館", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.8091, "lng": 135.4957, "x": 413.6599926883455, "y": 269.1628332722796, "ox": 424.1, "oy": 284.9}, {"id": "himeji-otsu", "name": "イオンモール姫路大津", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.8088, "lng": 134.6065, "x": 82.22906364174426, "y": 281.14831032834627, "ox": 97.5, "oy": 285.1}, {"id": "himeji-rivercity", "name": "イオンモール姫路リバーシティー", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7998, "lng": 134.6687, "x": 135.5709363582557, "y": 294.95168967165375, "ox": 120.3, "oy": 291.0}, {"id": "itami-koya", "name": "イオンモール伊丹昆陽", "pref": "兵庫", "stage": "main", "difficulty": "A", "lat": 34.7875, "lng": 135.3878, "x": 359.0813796836775, "y": 283.0574373657957, "ox": 384.5, "oy": 299.1}, {"id": "itami", "name": "イオンモール伊丹", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.7805, "lng": 135.4212, "x": 389.2654434288557, "y": 323.1933098200357, "ox": 396.8, "oy": 303.7}, {"id": "dainichi", "name": "イオンモール大日", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.7484, "lng": 135.5808, "x": 442.8064909750833, "y": 318.54457255764174, "ox": 455.4, "oy": 324.9}, {"id": "shijonawate", "name": "イオンモール四條畷", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.741, "lng": 135.639, "x": 493.55488024900706, "y": 315.5690825301963, "ox": 476.8, "oy": 329.8}, {"id": "naratomigaoka", "name": "イオンモール奈良登美ヶ丘", "pref": "奈良", "stage": "main", "difficulty": "C", "lat": 34.7265, "lng": 135.7524, "x": 515.6664624579115, "y": 362.1085608549797, "ox": 518.4, "oy": 339.4}, {"id": "takanohara", "name": "イオンモール高の原", "pref": "京都", "stage": "main", "difficulty": "C", "lat": 34.7227, "lng": 135.7895, "x": 552.8991549332081, "y": 326.2501570190203, "ox": 532.1, "oy": 341.9}, {"id": "tsurumiryokuchi", "name": "イオンモール鶴見緑地", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.7042, "lng": 135.5661, "x": 459.25740617897105, "y": 367.1085870329015, "ox": 450.0, "oy": 354.1}, {"id": "umie", "name": "神戸ハーバーランドumie", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.67971548, "lng": 135.18031142, "x": 308, "y": 370, "ox": 308, "oy": 370}, {"id": "osaka-dome", "name": "イオンモール大阪ドームシティ", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.6692, "lng": 135.478, "x": 403.4554975223524, "y": 379.21706438583584, "ox": 417.6, "oy": 377.2}, {"id": "kobe-minami", "name": "イオンモール神戸南", "pref": "兵庫", "stage": "main", "difficulty": "C", "lat": 34.6626, "lng": 135.1747, "x": 300.5188857533891, "y": 396.60936356512013, "ox": 306.2, "oy": 381.6}, {"id": "yamatokoriyama", "name": "イオンモール大和郡山", "pref": "奈良", "stage": "main", "difficulty": "B", "lat": 34.6418, "lng": 135.7976, "x": 543.2636090664047, "y": 409.4765171731406, "ox": 535.0, "oy": 395.3}, {"id": "sakaiteppocho", "name": "イオンモール堺鉄砲町", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.5927, "lng": 135.4819, "x": 394.3896707759679, "y": 439.2112399085922, "ox": 419.1, "oy": 427.7}, {"id": "sakaikitahanada", "name": "イオンモール堺北花田", "pref": "大阪", "stage": "main", "difficulty": "C", "lat": 34.5836, "lng": 135.5161, "x": 442.2767870492829, "y": 422.3979777531613, "ox": 431.6, "oy": 433.7}, {"id": "kashihara", "name": "イオンモール橿原", "pref": "奈良", "stage": "main", "difficulty": "A", "lat": 34.5097, "lng": 135.7922, "x": 533.8805371158813, "y": 482.80708060060226, "ox": 533.1, "oy": 482.5}, {"id": "hineno", "name": "イオンモール日根野", "pref": "大阪", "stage": "main", "difficulty": "B", "lat": 34.39, "lng": 135.3303, "x": 377.9190786705441, "y": 554.8290835046025, "ox": 363.4, "oy": 561.6}, {"id": "rinkusennan", "name": "イオンモールりんくう泉南", "pref": "大阪", "stage": "main", "difficulty": "A", "lat": 34.3753, "lng": 135.2737, "x": 328.0809213294559, "y": 578.0709164953975, "ox": 342.6, "oy": 571.3}, {"id": "wakayama", "name": "イオンモール和歌山", "pref": "和歌山", "stage": "main", "difficulty": "C", "lat": 34.2762, "lng": 135.148, "x": 296.4, "y": 636.7, "ox": 296.4, "oy": 636.7}];
 const STORAGE_KEY = "aeon_stamp_card_v6";
 const SECRET_KEY = "aeon_secret_set_v11";
 const PHOTO_DB = "aeon_mall_photo_db_v14";
@@ -1209,17 +1207,15 @@ const SECRET_POOL = [
   {id:"long_walk", title:"歩きすぎ注意報", desc:"1回で90分以上歩く", test:()=>maxField("minutes")>=90},
   {id:"ten_km", title:"十キロの壁", desc:"1回で10km以上歩く", test:()=>maxField("distance")>=10},
   {id:"eight_laps", title:"ぐるぐるマスター", desc:"1回で8周以上歩く", test:()=>maxField("laps")>=8},
-  {id:"s_clear", title:"最難関突破", desc:"難易度Sのモールを攻略する", test:()=>MALLS.some(m=>m.difficulty==="S" && rec(m.id).cleared)},
-  {id:"mie_three", title:"伊勢路へ", desc:"三重県のメインモールを3つ攻略する", test:()=>prefDoneCount("三重")>=3},
   {id:"osaka_five", title:"大阪横断", desc:"大阪府のメインモールを5つ攻略する", test:()=>prefDoneCount("大阪")>=5},
   {id:"hyogo_five", title:"播磨から阪神へ", desc:"兵庫県のメインモールを5つ攻略する", test:()=>prefDoneCount("兵庫")>=5},
-  {id:"extra_three", title:"裏街道", desc:"EXTRAを3施設攻略する", test:()=>MALLS.filter(m=>m.stage==="extra" && rec(m.id).cleared).length>=3},
-  {id:"all_ranks", title:"四色制覇", desc:"C・B・A・Sを各1施設以上攻略する", test:()=>["C","B","A","S"].every(d=>MALLS.some(m=>m.difficulty===d && rec(m.id).cleared))}
+  {id:"all_ranks", title:"三色制覇", desc:"C・B・Aを各1施設以上攻略する", test:()=>["C","B","A"].every(d=>MALLS.some(m=>m.difficulty===d && rec(m.id).cleared))}
 ];
 
 function getSecretSet(){
   let ids = [];
   try{ ids = JSON.parse(localStorage.getItem(SECRET_KEY) || "[]"); }catch(e){}
+  if(Array.isArray(ids)) ids = ids.filter(id=>SECRET_POOL.some(x=>x.id===id));
   if(!Array.isArray(ids) || ids.length!==5){
     const pool = [...SECRET_POOL];
     ids = [];
@@ -1233,12 +1229,12 @@ function getSecretSet(){
 }
 
 function maxField(field){
-  const vals = Object.values(records).filter(r=>r.cleared).map(r=>Number(r[field])||0);
+  const vals = MALLS.map(m=>rec(m.id)).filter(r=>r.cleared).map(r=>Number(r[field])||0);
   return vals.length ? Math.max(...vals) : 0;
 }
 function sameDayCount(){
   const count = {};
-  Object.values(records).filter(r=>r.cleared && r.date).forEach(r=>count[r.date]=(count[r.date]||0)+1);
+  MALLS.map(m=>rec(m.id)).filter(r=>r.cleared && r.date).forEach(r=>count[r.date]=(count[r.date]||0)+1);
   return Math.max(0, ...Object.values(count));
 }
 function prefDoneCount(pref){
@@ -1271,16 +1267,14 @@ function filteredMalls() {
 }
 
 
-function updateNextGoal(){const mains=MALLS.filter(m=>m.stage==="main"),remain=mains.filter(m=>!rec(m.id).cleared).length;if(!remain){$("#nextGoal").textContent="近畿メイン34 COMPLETE！";return}const c=[];[...new Set(mains.map(m=>m.pref))].forEach(p=>{const a=mains.filter(m=>m.pref===p),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${p}制覇まであと${r}`})});["C","B","A","S"].forEach(d=>{const a=mains.filter(m=>m.difficulty===d),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${d}ランク制覇まであと${r}`})});c.push({n:remain,t:`近畿制覇まであと${remain}`});c.sort((a,b)=>a.n-b.n);$("#nextGoal").textContent=c[0].t}
+function updateNextGoal(){const mains=MALLS.filter(m=>m.stage==="main"),remain=mains.filter(m=>!rec(m.id).cleared).length;if(!remain){$("#nextGoal").textContent="近畿30施設 COMPLETE！";return}const c=[];[...new Set(mains.map(m=>m.pref))].forEach(p=>{const a=mains.filter(m=>m.pref===p),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${p}制覇まであと${r}`})});["C","B","A","S"].forEach(d=>{const a=mains.filter(m=>m.difficulty===d),r=a.filter(m=>!rec(m.id).cleared).length;if(r)c.push({n:r,t:`${d}ランク制覇まであと${r}`})});c.push({n:remain,t:`近畿制覇まであと${remain}`});c.sort((a,b)=>a.n-b.n);$("#nextGoal").textContent=c[0].t}
 function randomStampType(){const r=Math.random();return r<.03?"rare":r<.08?"big":r<.16?"gold":r<.28?"sparkle":"normal"}
 
 function renderStats() {
   const mains = MALLS.filter(m => m.stage === "main");
-  const extras = MALLS.filter(m => m.stage === "extra");
   $("#clearMain").textContent = mains.filter(m => rec(m.id).cleared).length;
-  $("#clearExtra").textContent = extras.filter(m => rec(m.id).cleared).length;
 
-  const all = Object.entries(records).filter(([id,r]) => r.cleared);
+  const all = MALLS.map(m=>[m.id,rec(m.id)]).filter(([id,r]) => r.cleared);
   $("#totalDistance").textContent = all.reduce((s,[id,r]) => s + (Number(r.distance) || 0), 0).toFixed(1);
   $("#totalLaps").textContent = all.reduce((s,[id,r]) => s + (Number(r.laps) || 0), 0);
 
@@ -1326,14 +1320,10 @@ function makeSpot(mall) {
   let stampClass=""; if(r.cleared&&r.stampType&&r.stampType!=="normal") stampClass=" stamp-"+r.stampType;
   btn.className = "spot " + mall.stage + " diff-" + mall.difficulty + (r.cleared ? " done" : "") + stampClass;
   btn.dataset.id = mall.id;
-  const specialThreeLine = {
-    "E1": ["イオン", "SENRITO", "専門館"],
-    "E2": ["イオン", "藤井寺", "ショッピングセンター"],
-    "E3": ["イオン", "明石", "ショッピングセンター"]
-  };
+  const specialThreeLine = {senrito: ["イオン", "SENRITO", "専門館"], umie: ["神戸", "ハーバーランド", "umie"]};
 
-  if (specialThreeLine[label]) {
-    const parts = specialThreeLine[label];
+  if (specialThreeLine[mall.id]) {
+    const parts = specialThreeLine[mall.id];
     btn.innerHTML = `
       <span class="num">${label}</span>
       <span class="name-top">${parts[0]}</span>
@@ -1363,11 +1353,11 @@ function renderGrid() {
   grid.innerHTML = "";
   const items = filteredMalls();
   items.forEach(mall => grid.appendChild(makeSpot(mall)));
-  const needPad = Math.max(0, 40 - items.length);
+  const needPad = Math.max(0, 30 - items.length);
   for (let i = 0; i < needPad; i++) {
     const d = document.createElement("div");
     d.className = "spot empty";
-    d.innerHTML = `<span class="name-bottom">${i===needPad-1 && items.length===39 ? "COMPLETE!" : ""}</span>`;
+    d.innerHTML = `<span class="name-bottom">${i===needPad-1 && items.length===MALLS.length ? "COMPLETE!" : ""}</span>`;
     grid.appendChild(d);
   }
 }
@@ -1396,7 +1386,7 @@ function openDetail(mall) {
   current = mall;
   resetWalkState();
   const r = rec(mall.id);
-  $("#modalStage").textContent = mall.stage === "main" ? "MAIN STAGE" : "EXTRA STAGE";
+  $("#modalStage").textContent = "近畿30施設";
   $("#modalName").textContent = mall.name;
   $("#modalPref").textContent = mall.pref;
   $("#modalDifficulty").textContent = "難易度 " + mall.difficulty;
