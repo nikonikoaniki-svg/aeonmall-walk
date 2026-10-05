@@ -1380,7 +1380,17 @@ function openDetail(mall) {
   $("#lapDistanceInput").value = r.lapDistance || "";
   $("#lapStepsInput").value = r.lapSteps || "";
   $("#memoInput").value = r.memo || "";
-  $("#photoPreview").removeAttribute("src"); getPhoto(mall.id).then(b=>{if(b)$("#photoPreview").src=URL.createObjectURL(b)}).catch(()=>{});
+  $("#photoExteriorPreview").removeAttribute("src");
+  $("#photoCoursePreview").removeAttribute("src");
+
+  getPhoto(mall.id + ":exterior").then(blob => {
+    if (blob) $("#photoExteriorPreview").src = URL.createObjectURL(blob);
+  }).catch(()=>{});
+
+  getPhoto(mall.id + ":course").then(blob => {
+    if (blob) $("#photoCoursePreview").src = URL.createObjectURL(blob);
+  }).catch(()=>{});
+
   $("#detailDialog").showModal();
 }
 
