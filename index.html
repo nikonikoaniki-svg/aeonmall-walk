@@ -839,8 +839,8 @@ textarea { resize:vertical; }
     min-height:46px;
   }
   #detailDialog .detail-fields{
-    grid-template-columns:1fr 1fr !important;
-    gap:10px !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:12px !important;
   }
   #detailDialog .detail-fields label{
     font-size:14px !important;
@@ -914,6 +914,14 @@ textarea { resize:vertical; }
   background:#eef3f6;
 }
 
+/* Keep native date controls inside their grid cell, including iOS Safari. */
+#detailDialog .detail-fields label { min-width:0; }
+#detailDialog .detail-fields input,
+#detailDialog .detail-fields textarea {
+  display:block;
+  min-width:0;
+  max-width:100%;
+}
 </style>
 </head>
 <body>
