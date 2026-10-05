@@ -1,4 +1,4 @@
-const CACHE='aeon-stamp-card-v27';
+const CACHE='aeon-stamp-card-v28';
 const ASSETS=['./','./index.html','./manifest.json','./icon.svg'];
 
 self.addEventListener('install', e => {
